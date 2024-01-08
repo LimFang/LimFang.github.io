@@ -30,7 +30,7 @@ github:
   username: LimFang # change to your github username
 
 twitter:
-  username: None # change to your twitter username
+  username: LimFang # change to your twitter username
 
 social:
   # Change to your full name.
@@ -40,7 +40,7 @@ social:
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/LimFang # change to your twitter homepage
-    - https://github.com/None # change to your github homepage
+    - https://github.com/LimFang # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
