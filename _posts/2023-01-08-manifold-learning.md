@@ -6,3 +6,9 @@ tags: [math]     # TAG names should always be lowercase
 ---
 
 ## manifold learning : what how and why
+
+
+
+## reference
+Interpreting Posterior of Gaussian Process for Regression from https://medium.com/
+
