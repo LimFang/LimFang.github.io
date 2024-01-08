@@ -1,6 +1,6 @@
 ---
 title: manifold_learning
-date: YYYY-MM-DD HH:MM:SS +0800
+date: 2023-01-08 11:30:00 +0800
 categories: [machine learning, manifold]
 tags: [math]     # TAG names should always be lowercase
 ---
