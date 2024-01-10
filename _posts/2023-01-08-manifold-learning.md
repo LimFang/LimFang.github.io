@@ -17,13 +17,13 @@ tags: [math]     # TAG names should always be lowercase
 | $R_D$                              | D-dimensional Euclidean space                                 |
 | $\mathcal{M}$                      | manifold                                                      |
 | $C^{\mathcal{l}}$                  | functions with continuous derivatives up to order \mathcal{l} |
-| $\mathcal{D}={\mathbf{\{x_i\}}_{i=1}^n}$ | A dataset containing n data points                            |
+| $\mathcal{D}={\mathbf{\{x_i\}}_{i=1}^n}$ | A dataset containing n data points                      |
 
 ### 流形与嵌入
 
 #### 流形与坐标卡
 
-一个d维的流形 $\mathcal{M} $是满以下性质的拓扑空间：
+一个d维的流形 $\mathcal{M}$是满以下性质的拓扑空间：
 - 对 $\mathcal{M} $上每一点p，存在映射 $\varphi $和p点的开集邻域 $U \subset \mathcal{M} $，满足 $\varPi: U\rightarrow\varPi(U) $是双射映射并且 $\varPi \varPi^{-1} $是光滑的。组合 $(U,\varphi) $称为卡，其逆映射称为局部坐标(local coordinate， $\mathcal{R}^d $映射到流形)。（**即任一点，它附近的领域，映射为欧氏空间，且双射**）
 - 对于 $\mathcal{M} $上两点  $p,p^{'}\in\mathcal{M} $,并且两点分别包含在坐标卡 $(U,\varphi) (V,\phi) $中，如果 $U\cap V\ne \varnothing $，那么映射 $\varphi \circ \phi^{-1} $在 $\phi(U\cap V) $上是光滑的且存在光滑的逆映射
 
