@@ -37,14 +37,14 @@ math: true
 ### Symmetric Positive Definite(SPD) 流形
 SPD流形 $\mathcal{S}_{++}^{d} $是由所有的 $d\times d $的SPD矩阵组成的，即该流形上每个点都是矩阵
 
-```math
+$$
 \begin{gathered}\mathcal{S}_{++}^d=\{\mathbf{M}\in\mathbb{R}^{d\times d}:\mathbf{M}=\mathbf{M}^\top,x^\top\mathbf{M}\mathbf{x}>0,\forall\mathbf{x}\in\mathbb{R}^d\backslash\{\mathbf{0}_d\}\}\end{gathered}
-```
+$$
 
 ### Orthogonal matrices 正交矩阵流形 （i.e. special orthogonal (SO) group）
-```math
+$$
 \mathrm{SO}(n)=\{X\in\mathbb{R}^{n\times n}\mid XX^{\mathrm{T}}=X^{\mathrm{T}}X=\mathrm{I}_n\mathrm{~and~}\det(X)=1\}.
-```
+$$
 
 ### 黎曼流形和等距嵌入
 
@@ -68,44 +68,44 @@ SPD流形 $\mathcal{S}_{++}^{d} $是由所有的 $d\times d $的SPD矩阵组成�
 
 设唯一测地线 $\Gamma(t) $满足 $\Gamma(0)=p $，初始切向量 $\Gamma^{'}(0)=\mathbf{v} $，其中 $p \in \mathcal{M,\mathbf{v} \in \mathcal{T}_p \mathcal{M}} $，则在p处的指数映射定义为：
 
-```math
+$$
 Exp_p(v)=\Gamma(1)
-```
+$$
 
 指数映射和对数映射是流形和它的切空间之间的同构映射，计算这些映射的算法依赖于感兴趣的流形和切空间的基点。
-- 给定SPD矩阵 $\mathcal{M} \in\mathcal{S}_{++}^{d} $，对应的**矩阵对数函数**为 $\mathrm{logm}(\mathbf{M}):\mathcal{S}_{++}^d \rightarrow sym(d) $：
+- 给定SPD矩阵 $`\mathcal{M} \in\mathcal{S}_{++}^{d}`$，对应的**矩阵对数函数**为 $`\mathrm{logm}(\mathbf{M}):\mathcal{S}_{++}^d \rightarrow sym(d)`$：
 
-```math
+$$
 {logm}(M)=U\log(\Sigma)U^\top 
-```
+$$
 
-sym(d)代表dxd的对称矩阵张成的空间， $\ddot{U\Sigma U}^{\top}=M $
-- 给定对称矩阵 $N \in sym(d) $，**矩阵指数函数**为 $expm(\mathbf{N}:sym(d)\rightarrow \mathcal{S}_{++}^d) $：
+sym(d)代表dxd的对称矩阵张成的空间， $`\ddot{U\Sigma U}^{\top}=M `$
+- 给定对称矩阵 $`N \in sym(d) `$，**矩阵指数函数**为 $`expm(\mathbf{N}:sym(d)\rightarrow \mathcal{S}_{++}^d) `$：
 
-```math
+$$
 {expm}(\mathbf{N})=\mathbf{U}\exp(\mathbf{\Sigma})\mathbf{U}^\top 
-```
+$$
 
- 其中 $\ddot{U\Sigma U}^{\top}=\mathbf{N} $
+ 其中 $`\ddot{U\Sigma U}^{\top}=\mathbf{N} `$
 ### weighted Frechet mean (wFM)
 
-给定黎曼流形  $(\mathcal{M},g) $ ，N个数据点 ${X_i}_{i=1}^N \subset\mathcal{M} $，具有凸约束的权重 ${w_i}_{i=1}^N \subset(0,1] $,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
+给定黎曼流形  $`(\mathcal{M},g)`$ ，N个数据点 $`{X_i}_{i=1}^N \subset\mathcal{M}`$，具有凸约束的权重 $`{w_i}_{i=1}^N \subset(0,1]`$,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
 
-```math
+$$
 wFM({X_i},{w_i})=argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)
-```
+$$
 平均权重时，FM常在流形卷积、激活和归一化层中使用，作为经典欧氏均值的推广。
 
 
 ### 收回操作 （Retraction operation）
-- SPD上的收回操作,在局部刚性的条件下，从切空间回到流形上的光滑映射 $\Gamma_{M}(\cdot):\mathcal{T}_M\mathcal{S}_{++}^d\to\mathcal{S}_{++} $ ： $\Gamma_M(\zeta)=M^{\frac12}\text{expm}(M^{-\frac12}\zeta M^{-\frac12})M^{\frac12} $
-  其中， $\zeta\in\mathbb{R}^{d\times d} $是切空间M上的点
+- SPD上的收回操作,在局部刚性的条件下，从切空间回到流形上的光滑映射 $`\Gamma_{M}(\cdot):\mathcal{T}_M\mathcal{S}_{++}^d\to\mathcal{S}_{++} `$ ： $`\Gamma_M(\zeta)=M^{\frac12}\text{expm}(M^{-\frac12}\zeta M^{-\frac12})M^{\frac12} `$
+  其中， $`\zeta\in\mathbb{R}^{d\times d} `$是切空间M上的点
 ### 正交投影 （Orthogonal projection）
-黎曼流形上的正交映射是将点M的任意一个梯度转换为切空间上的黎曼梯度 $\pi_{\mathbf{M}}(\cdot):\mathbb{R}^{d\times d}\rightarrow\mathcal{T}_{M}\mathcal{S}_{++}^{d} $：
+黎曼流形上的正交映射是将点M的任意一个梯度转换为切空间上的黎曼梯度 $`\pi_{\mathbf{M}}(\cdot):\mathbb{R}^{d\times d}\rightarrow\mathcal{T}_{M}\mathcal{S}_{++}^{d} `$：
 
-```math
+$$
 \pi_M(\nabla_M)=M\frac12(\nabla_M+\nabla_M^\top)M
-```
+$$
 
 ## 2.流形学习的前提与范式
 ### 流形假设
@@ -114,38 +114,38 @@ wFM({X_i},{w_i})=argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)
 ### 范式1 Neighborhood graphs
 反映出数据的局部几何和拓扑信息；用两种方式定义邻居：
 - radius-neighbor graph
-```math
-如果 $\parallel x_i -x_j\parallel \leq r$ ，那么x_j是 x_i的邻居
-```
+$$
+如果 \parallel x_i -x_j\parallel \leq r，那么x_j是 x_i的邻居
+$$
 - KNN 图
   如果 $x_j$ 是最靠近 $x_i$ 的前k个点 ，那么 $x_j$ 是 $x_i$ 的邻居
 可以用以下的kernel function定义图的kernel matrix来衡量图节点间的权重，K通常是稀疏的 
-```math
+$$
 K_{ij}=\left\{
 \begin{aligned}
 K(\frac{\parallel x_i -x_j \parallel}{h}), x_j \in \mathcal{N}_i \\
     0,    otherwise\\
 \end{aligned}
 \right.
-```
+$$
 ### 范式2 Linear local approximation
 局部线性近似对于单变量函数来说，即一个微分函数可以被近似为其切线；一个多元函数，他的线性近似可以看作在该切点附近的切平面
 
 ![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/multiple_lla.jpg?raw=true)
 
 该方法从PCA和random projection演化来，后两者只关注全局的线性信息，没有利用参考点x附近的几何结构，常利用加权PCA实现（IPCA）：
-```math
+$$
 C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
-```
+$$
 ### 范式3 Principal curves and principal d-manifolds
 
 
 ### 范式4 Embedding algorithms
 嵌入算法的任务是生成输入的平滑映射，从而尽可能地减少邻域信息的失真
 #### PCA
-```math
+$$
 \min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\sum_{i=1}^n\lVert x_i-\mathbf{T}\mathbf{T}^{\top}x_i\rVert^2=\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\lVert\mathbf{X}-\mathbf{X}\mathbf{T}\mathbf{T}^{\top}\rVert_F^2
-```
+$$
 #### “One shot” embedding 
 - Isomap
 ![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/isomap.jpg?raw=true)
@@ -176,13 +176,13 @@ C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
 
 ### 流形下的复数表示
 对于复数 $\forall z=x+iy\in\mathbb{C} $,x、y为实数，其极坐标为：
-```math
+$$
 \begin{aligned}
 &z=r(x,y)\exp(i\theta(x,y)) \\
 &\mathrm{abs}(\mathrm{z})=r(x,y)=\sqrt{x^2+y^2} \\
 &\mathrm{pha(z)}=\theta(x,y)=\arctan(y,x)
 \end{aligned}
-```
+$$
 幅值函数视作1X1的SPD矩阵
 
 相位函数看作1维圆环，符合SO(2)
