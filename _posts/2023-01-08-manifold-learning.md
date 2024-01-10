@@ -91,9 +91,7 @@ $$
 
 给定黎曼流形  $`(\mathcal{M},g)`$ ，N个数据点 $`{X_i}_{i=1}^N \subset\mathcal{M}`$，具有凸约束的权重 $`{w_i}_{i=1}^N \subset(0,1]`$,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
 
-$$
-wFM({X_i},{w_i})=argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)
-$$
+$$wFM({X_i},{w_i})=argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)$$
 平均权重时，FM常在流形卷积、激活和归一化层中使用，作为经典欧氏均值的推广。
 
 
@@ -114,26 +112,24 @@ $$
 ### 范式1 Neighborhood graphs
 反映出数据的局部几何和拓扑信息；用两种方式定义邻居：
 - radius-neighbor graph
-$$
-如果 \parallel x_i -x_j\parallel \leq r，那么x_j是 x_i的邻居
-$$
+$$如果 \parallel x_i -x_j\parallel \leq r，那么x_j是 x_i的邻居$$
 - KNN 图
   如果 $x_j$ 是最靠近 $x_i$ 的前k个点 ，那么 $x_j$ 是 $x_i$ 的邻居
-可以用以下的kernel function定义图的kernel matrix来衡量图节点间的权重，K通常是稀疏的 
+可以用以下的kernel function定义图的kernel matrix来衡量图节点间的权重，K通常是稀疏的
+
 $$
-K_{ij}=\left\{
-\begin{aligned}
-K(\frac{\parallel x_i -x_j \parallel}{h}), x_j \in \mathcal{N}_i \\
-    0,    otherwise\\
-\end{aligned}
-\right.
-$$
+\begin{align}
+K_{ij} &= K(\frac{\parallel x_i -x_j \parallel}{h}), x_j \in \mathcal{N}_i  \\
+ &=   0,    otherwise \\
+\end{align}
+$$ 
 ### 范式2 Linear local approximation
 局部线性近似对于单变量函数来说，即一个微分函数可以被近似为其切线；一个多元函数，他的线性近似可以看作在该切点附近的切平面
 
 ![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/multiple_lla.jpg?raw=true)
 
 该方法从PCA和random projection演化来，后两者只关注全局的线性信息，没有利用参考点x附近的几何结构，常利用加权PCA实现（IPCA）：
+
 $$
 C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
 $$
@@ -143,9 +139,9 @@ $$
 ### 范式4 Embedding algorithms
 嵌入算法的任务是生成输入的平滑映射，从而尽可能地减少邻域信息的失真
 #### PCA
-$$
-\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\sum_{i=1}^n\lVert x_i-\mathbf{T}\mathbf{T}^{\top}x_i\rVert^2=\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\lVert\mathbf{X}-\mathbf{X}\mathbf{T}\mathbf{T}^{\top}\rVert_F^2
-$$
+
+$`\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\sum_{i=1}^n\lVert x_i-\mathbf{T}\mathbf{T}^{\top}x_i\rVert^2=\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\lVert\mathbf{X}-\mathbf{X}\mathbf{T}\mathbf{T}^{\top}\rVert_F^2`$
+
 #### “One shot” embedding 
 - Isomap
 ![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/isomap.jpg?raw=true)
@@ -187,7 +183,7 @@ $$
 
 相位函数看作1维圆环，符合SO(2)
 ### 流形下的特征融合 （欧氏下的特征融合对比）
-如Chakraborty等人所证明的，卷积WFM层与复值标度是等变的，因为放缩旋转群 $`\mathcal{R}^{+}\times SO(2) $`是等距的，即它传递地作用在复平面C上。（等距群的等价性）
+如Chakraborty等人所证明的，卷积WFM层与复值标度是等变的，因为放缩旋转群 $`\mathcal{R}^{+}\times SO(2) `$是等距的，即它传递地作用在复平面C上。（等距群的等价性）
 #### 流形融合：输出是以黎曼距离和切线空间上的切线向量表示的特征图
 
 距离融合：输入为 $`\{X_i\}_{i=1}^{N}\text{С}\mathcal{M} `$，输出为 $`\{d(X_i,M)\}_{i=1}^N\subset\mathbb{R}^N `$，其中 $`M=\mathrm{FM}(\{X_i\}) `$
