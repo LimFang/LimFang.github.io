@@ -54,13 +54,13 @@ SPD流形 $\mathcal{S}_{++}^{d} $是由所有的 $d\times d $的SPD矩阵组成�
 
 #### 等距和等距映射
 
-- 已知光滑映射  $F:\mathcal{M} \rightarrow \mathcal{N} $，F在p的微分为 $dF_p:\mathcal{T}_p \mathcal{M} \rightarrow \mathcal{T}_{F(p)} \mathcal{M} $。当我们固定坐标系统， $dF(p) $ 变成N*M的矩阵，将  $v\in\mathcal{T}_p \mathcal{M} $ 映射到  $dF_pv \in \mathcal{T}_{F(p)} \mathcal{M} $
+- 已知光滑映射  $F:\mathcal{M} \rightarrow \mathcal{N} $，F在p的微分为 $`dF_p:\mathcal{T}_p \mathcal{M} \rightarrow \mathcal{T}_{F(p)} \mathcal{M}`$。当我们固定坐标系统， $`dF(p)`$ 变成N*M的矩阵，将  $`v\in\mathcal{T}_p \mathcal{M}`$ 映射到  $`dF_pv \in \mathcal{T}_{F(p)} \mathcal{M} `$
 
 - 当每个点p处的黎曼度量g由F保持时,即
 
-![Desktop View](../assets/common/isometry.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/isometry.jpg)
 
-称两个黎曼流形 $(\mathcal{M},g,),(\mathcal{N},h) $间的映射是等距的
+称两个黎曼流形 $`(\mathcal{M},g,),(\mathcal{N},h) `$间的映射是等距的
 
 
 ### 指数和对数映射
