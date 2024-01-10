@@ -130,7 +130,7 @@ K(\frac{\parallel x_i -x_j \parallel}{h}), x_j \in \mathcal{N}_i \\
 ### 范式2 Linear local approximation
 局部线性近似对于单变量函数来说，即一个微分函数可以被近似为其切线；一个多元函数，他的线性近似可以看作在该切点附近的切平面
 
-![Desktop View](../assets/common/multiple_lla.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/multiple_lla.jpg?raw=true)
 
 该方法从PCA和random projection演化来，后两者只关注全局的线性信息，没有利用参考点x附近的几何结构，常利用加权PCA实现（IPCA）：
 ```math
@@ -147,20 +147,20 @@ C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
 ```
 #### “One shot” embedding 
 - Isomap
-![Desktop View](../assets/common/isomap.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/isomap.jpg?raw=true)
 
 - Diffusion Maps/Laplacian Eigenmaps
   谱聚类(spectral embedding)会将图拉普拉斯矩阵和Laplace-Beltrami算子联系起来
   
-![Desktop View](../assets/common/dissision_map.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/dissision_map.jpg?raw=true)
 
 -构造图拉普拉斯矩阵
 
-![Desktop View](../assets/common/construct_graph_Laplacian_matrix.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/construct_graph_Laplacian_matrix.jpg?raw=true)
 
 - Local Tangent Space Alignment (LTSA)
   
-![Desktop View](../assets/common/Local_tangent_space_alignment.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/Local_tangent_space_alignment.jpg?raw=true)
 
 #### “Horseshoe” effects
 基于特征向量的方法，在数据流形具有较大的纵横比时，此类算法会失败，被称为Repeated Eigendirection Problem，在真实数据集中普遍存在。吸引-排斥算法，如t-SNE可以克服此类问题
@@ -211,7 +211,7 @@ C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
 ### 流形下的批归一化函数
 基于矩阵李群（Lie Groups）上的高斯分布，Chakraborty在流形范数下提出了一种封闭形式的黎曼批量归一化算法,SPD矩阵流形上的**高斯分布**将变为对数正态分布
 
-![Desktop View](../assets/common/BN_Lie_Groups.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/BN_Lie_Groups.jpg?raw=true)
 
 在神经网络应用中，将Spd和SO(2)看作李群，然后以流形范数（ManifoldNorm）中应用归一化算法，当流形数据不符合高斯分布时采用此种方法反而会导致性能的下降
 ## reference
