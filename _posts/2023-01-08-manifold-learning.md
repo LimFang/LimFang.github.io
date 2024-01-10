@@ -17,26 +17,27 @@ tags: [math]     # TAG names should always be lowercase
 | $R_D$                              | D-dimensional Euclidean space                                 |
 | $\mathcal{M}$                      | manifold                                                      |
 | $C^{\mathcal{l}}$                  | functions with continuous derivatives up to order \mathcal{l} |
-| $\mathcal{D}={{x}_{i=1}^n}$ | A dataset containing n data points                            |
+| $\mathcal{D}={\bold{\{x_i\}}_{i=1}^n}$ | A dataset containing n data points                            |
 
 ### 流形与嵌入
 
 #### 流形与坐标卡
 
-一个d维的流形$\mathcal{M}$是满以下性质的拓扑空间：
-- 对$\mathcal{M}$上每一点p，存在映射$\varphi$和p点的开集邻域$U \subset \mathcal{M}$，满足$\varPi: U\rightarrow\varPi(U)$是双射映射并且$\varPi \varPi^{-1}$是光滑的。组合$(U,\varphi)$称为卡，其逆映射称为局部坐标(local coordinate，$\mathcal{R}^d$映射到流形)。（**即任一点，它附近的领域，映射为欧氏空间，且双射**）
-- 对于$\mathcal{M}$上两点 $p,p^{'}\in\mathcal{M}$,并且两点分别包含在坐标卡$(U,\varphi) (V,\phi)$中，如果$U\cap V\ne \varnothing$，那么映射$\varphi \circ \phi^{-1}$在$\phi(U\cap V)$上是光滑的且存在光滑的逆映射
+一个d维的流形 $\mathcal{M} $是满以下性质的拓扑空间：
+- 对 $\mathcal{M} $上每一点p，存在映射 $\varphi $和p点的开集邻域 $U \subset \mathcal{M} $，满足 $\varPi: U\rightarrow\varPi(U) $是双射映射并且 $\varPi \varPi^{-1} $是光滑的。组合 $(U,\varphi) $称为卡，其逆映射称为局部坐标(local coordinate， $\mathcal{R}^d $映射到流形)。（**即任一点，它附近的领域，映射为欧氏空间，且双射**）
+- 对于 $\mathcal{M} $上两点  $p,p^{'}\in\mathcal{M} $,并且两点分别包含在坐标卡 $(U,\varphi) (V,\phi) $中，如果 $U\cap V\ne \varnothing $，那么映射 $\varphi \circ \phi^{-1} $在 $\phi(U\cap V) $上是光滑的且存在光滑的逆映射
 
 这里涉及到所谓的single、global 坐标卡的概念
 
 #### 嵌入
 
-微分几何中，嵌入是两个流形之间的光滑映射$F:\mathcal{M} \rightarrow\mathcal{N}$，要求$F^{-1}$存在且光滑。通常，高维数据存在于$\mathcal{N}=\mathbb{R}^D$，需要估计的$\mathcal{M}$是$\mathbb{R}^D$的子流形。流形学习算法的关键可以视为寻找一个嵌入$F:\mathcal{M} \rightarrow\mathbb{R}^m,d\leq m\ll D$,d是流形的本征维度
+微分几何中，嵌入是两个流形之间的光滑映射 $F:\mathcal{M} \rightarrow\mathcal{N} $，要求 $F^{-1} $存在且光滑。通常，高维数据存在于 $\mathcal{N}=\mathbb{R}^D $，需要估计的 $\mathcal{M} $是 $\mathbb{R}^D $的子流形。流形学习算法的关键可以视为寻找一个嵌入 $F:\mathcal{M} \rightarrow\mathbb{R}^m,d\leq m\ll D $,d是流形的本征维度
 
 ### Symmetric Positive Definite(SPD) 流形
-SPD流形$\mathcal{S}_{++}^{d}$是由所有的$d\times d$的SPD矩阵组成的，即该流形上每个点都是矩阵
+SPD流形 $\mathcal{S}_{++}^{d} $是由所有的 $d\times d $的SPD矩阵组成的，即该流形上每个点都是矩阵
+
 $$
-\begin{gathered}\mathcal{S}_{++}^d=\{\boldsymbol{M}\in\mathbb{R}^{d\times d}:\boldsymbol{M}=\boldsymbol{M}^\top,\\x^\top\boldsymbol{M}\boldsymbol{x}>0,\forall\boldsymbol{x}\in\mathbb{R}^d\backslash\{\boldsymbol{0}_d\}\}\end{gathered}
+\begin{gathered}\mathcal{S}_{++}^d=\{\boldsymbol{M}\in\mathbb{R}^{d\times d}:\boldsymbol{M}=\boldsymbol{M}^\top,\x^\top\boldsymbol{M}\boldsymbol{x}>0,\forall\boldsymbol{x}\in\mathbb{R}^d\backslash\{\boldsymbol{0}_d\}\}\end{gathered}
 $$
 
 ### Orthogonal matrices 正交矩阵流形 （i.e. special orthogonal (SO) group）
@@ -48,38 +49,45 @@ $$
 
 #### 切空间和黎曼度量
 
-- 在点$p \in \mathcal{M}$的切空间$\mathcal{T}_p \mathcal{M}$是$\mathcal{M}$的切向量组成的d维向量空间，如果$\gamma(t)$是$\mathcal{M}$上通过p的光滑曲线，且$\gamma(0)=p$，则这条曲线在p处的导数$\gamma^{'}(0)$ 是 $\mathcal{T}_p \mathcal{M}$上的切向量。
-- 黎曼度量将切线空间的内积与$\mathcal{M}$上的每一点p相关联，具有黎曼度量的光滑流形定义为黎曼流形。对于切线空间的所有向量，其范数定义为$\parallel \bold{x} \parallel_g = \sqrt{<\bold{v},\bold{v}>_g}$,距离定义为$\parallel \bold{v}_1-\bold{v}_2 \parallel_g$，角度定义为${cos}^{-1}(<\bold{v}_1,\bold{v}_2>_g/(\parallel \bold{v}_1 \parallel_g\parallel \bold{v}_2 \parallel_g))$
+- 在点 $p \in \mathcal{M} $的切空间 $\mathcal{T}_p \mathcal{M} $是 $\mathcal{M} $的切向量组成的d维向量空间，如果 $\gamma(t) $是 $\mathcal{M} $上通过p的光滑曲线，且 $\gamma(0)=p $，则这条曲线在p处的导数 $\gamma^{'}(0) $ 是  $\mathcal{T}_p \mathcal{M} $上的切向量。
+- 黎曼度量将切线空间的内积与 $\mathcal{M} $上的每一点p相关联，具有黎曼度量的光滑流形定义为黎曼流形。对于切线空间的所有向量，其范数定义为 $\parallel \bold{x} \parallel_g = \sqrt{<\bold{v},\bold{v}>_g} $,距离定义为 $\parallel \bold{v}_1-\bold{v}_2 \parallel_g $，角度定义为 ${cos}^{-1}(<\bold{v}_1,\bold{v}_2>_g/(\parallel \bold{v}_1 \parallel_g\parallel \bold{v}_2 \parallel_g)) $
 
 #### 等距和等距映射
 
-- 已知光滑映射 $F:\mathcal{M} \rightarrow \mathcal{N}$，F在p的微分为$dF_p:\mathcal{T}_p \mathcal{M} \rightarrow \mathcal{T}_{F(p)} \mathcal{M}$。当我们固定坐标系统，$dF(p)$ 变成N*M的矩阵，将 $v\in\mathcal{T}_p \mathcal{M}$ 映射到 $dF_pv \in \mathcal{T}_{F(p)} \mathcal{M}$
+- 已知光滑映射  $F:\mathcal{M} \rightarrow \mathcal{N} $，F在p的微分为 $dF_p:\mathcal{T}_p \mathcal{M} \rightarrow \mathcal{T}_{F(p)} \mathcal{M} $。当我们固定坐标系统， $dF(p) $ 变成N*M的矩阵，将  $v\in\mathcal{T}_p \mathcal{M} $ 映射到  $dF_pv \in \mathcal{T}_{F(p)} \mathcal{M} $
 
 - 当每个点p处的黎曼度量g由F保持时,即
-![isometry](./assets/common/isometry.jpg)
-称两个黎曼流形$(\mathcal{M},g,),(\mathcal{N},h)$间的映射是等距的
+![isometry](isometry.jpg)
+称两个黎曼流形 $(\mathcal{M},g,),(\mathcal{N},h) $间的映射是等距的
 
 
 ### 指数和对数映射
 
-设唯一测地线$\Gamma(t)$满足$\Gamma(0)=p$，初始切向量$\Gamma^{'}(0)=\bold{v}$，其中$p \in \mathcal{M,\bold{v} \in \mathcal{T}_p \mathcal{M}}$，则在p处的指数映射定义为：
+设唯一测地线 $\Gamma(t) $满足 $\Gamma(0)=p $，初始切向量 $\Gamma^{'}(0)=\bold{v} $，其中 $p \in \mathcal{M,\bold{v} \in \mathcal{T}_p \mathcal{M}} $，则在p处的指数映射定义为：
+
 $$
 Exp_p(v)=\Gamma(1)
 $$
+
 指数映射和对数映射是流形和它的切空间之间的同构映射，计算这些映射的算法依赖于感兴趣的流形和切空间的基点。
-- 给定SPD矩阵$\mathcal{M} \in\mathcal{S}_{++}^{d}$，对应的**矩阵对数函数**为$\mathrm{logm}(\boldsymbol{M}):\mathcal{S}_{++}^d \rightarrow sym(d)$：
+- 给定SPD矩阵 $\mathcal{M} \in\mathcal{S}_{++}^{d} $，对应的**矩阵对数函数**为 $\mathrm{logm}(\boldsymbol{M}):\mathcal{S}_{++}^d \rightarrow sym(d) $：
+
 $$
 \operatorname{logm}(M)=U\log(\Sigma)U^\top 
 $$
-sym(d)代表dxd的对称矩阵张成的空间，$\ddot{U\Sigma U}^{\top}=M$
-- 给定对称矩阵$N \in sym(d)$，**矩阵指数函数**为$expm(\bold{N}:sym(d)\rightarrow \mathcal{S}_{++}^d)$：
+
+sym(d)代表dxd的对称矩阵张成的空间， $\ddot{U\Sigma U}^{\top}=M $
+- 给定对称矩阵 $N \in sym(d) $，**矩阵指数函数**为 $expm(\bold{N}:sym(d)\rightarrow \mathcal{S}_{++}^d) $：
+
 $$
 \operatorname{expm}(\boldsymbol{N})=\boldsymbol{U}\exp(\boldsymbol{\Sigma})\boldsymbol{U}^\top 
 $$
- 其中$\ddot{U\Sigma U}^{\top}=\bold{N}$
+
+ 其中 $\ddot{U\Sigma U}^{\top}=\bold{N} $
 ### weighted Frechet mean (wFM)
 
-给定黎曼流形 $(\mathcal{M},g)$ ，N个数据点${X_i}_{i=1}^N \subset\mathcal{M}$，具有凸约束的权重${w_i}_{i=1}^N \subset(0,1]$,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
+给定黎曼流形  $(\mathcal{M},g) $ ，N个数据点 ${X_i}_{i=1}^N \subset\mathcal{M} $，具有凸约束的权重 ${w_i}_{i=1}^N \subset(0,1] $,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
+
 $$
 wFM({X_i},{w_i})=\argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)
 $$
@@ -87,10 +95,11 @@ $$
 
 
 ### 收回操作 （Retraction operation）
-- SPD上的收回操作,在局部刚性的条件下，从切空间回到流形上的光滑映射$\Gamma_{M}(\cdot):\mathcal{T}_M\mathcal{S}_{++}^d\to\mathcal{S}_{++}$ ：$\Gamma_M(\zeta)=M^{\frac12}\text{expm}(M^{-\frac12}\zeta M^{-\frac12})M^{\frac12}$
-  其中，$\zeta\in\mathbb{R}^{d\times d}$是切空间M上的点
+- SPD上的收回操作,在局部刚性的条件下，从切空间回到流形上的光滑映射 $\Gamma_{M}(\cdot):\mathcal{T}_M\mathcal{S}_{++}^d\to\mathcal{S}_{++} $ ： $\Gamma_M(\zeta)=M^{\frac12}\text{expm}(M^{-\frac12}\zeta M^{-\frac12})M^{\frac12} $
+  其中， $\zeta\in\mathbb{R}^{d\times d} $是切空间M上的点
 ### 正交投影 （Orthogonal projection）
-黎曼流形上的正交映射是将点M的任意一个梯度转换为切空间上的黎曼梯度$\pi_{\boldsymbol{M}}(\cdot):\mathbb{R}^{d\times d}\rightarrow\mathcal{T}_{M}\mathcal{S}_{++}^{d}$：
+黎曼流形上的正交映射是将点M的任意一个梯度转换为切空间上的黎曼梯度 $\pi_{\boldsymbol{M}}(\cdot):\mathbb{R}^{d\times d}\rightarrow\mathcal{T}_{M}\mathcal{S}_{++}^{d} $：
+
 $$
 \pi_M(\nabla_M)=M\frac12(\nabla_M+\nabla_M^\top)M
 $$
@@ -120,7 +129,7 @@ K(\frac{\parallel x_i -x_j \parallel}{h}), x_j \in \mathcal{N}_i \\
 $$
 ### 范式2 Linear local approximation
 局部线性近似对于单变量函数来说，即一个微分函数可以被近似为其切线；一个多元函数，他的线性近似可以看作在该切点附近的切平面
-![lla](./assets/common/multiple_lla.jpg)
+![lla](multiple_lla.jpg)
 该方法从PCA和random projection演化来，后两者只关注全局的线性信息，没有利用参考点x附近的几何结构，常利用加权PCA实现（IPCA）：
 $$
 C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
@@ -136,14 +145,14 @@ $$
 $$
 #### “One shot” embedding 
 - Isomap
-![iso](./assets/common/isomap.jpg)
+![iso](isomap.jpg)
 - Diffusion Maps/Laplacian Eigenmaps
   谱聚类(spectral embedding)会将图拉普拉斯矩阵和Laplace-Beltrami算子联系起来
-![dm](./assets/common/dissision_map.jpg)
+![dm](dissision_map.jpg)
     -构造图拉普拉斯矩阵
-    ![construct_graph_Laplacian](./assets/common/construct_graph_Laplacian_matrix.jpg)
+    ![construct_graph_Laplacian](construct_graph_Laplacian_matrix.jpg)
 - Local Tangent Space Alignment (LTSA)
-![Local_tangent_space_alignment](./assets/common/Local_tangent_space_alignment.jpg)
+![Local_tangent_space_alignment](Local_tangent_space_alignment.jpg)
 #### “Horseshoe” effects
 基于特征向量的方法，在数据流形具有较大的纵横比时，此类算法会失败，被称为Repeated Eigendirection Problem，在真实数据集中普遍存在。吸引-排斥算法，如t-SNE可以克服此类问题
 ## 3.流形学习的统计学基础
@@ -193,7 +202,7 @@ $$
 ### 流形下的批归一化函数
 基于矩阵李群（Lie Groups）上的高斯分布，Chakraborty在流形范数下提出了一种封闭形式的黎曼批量归一化算法,SPD矩阵流形上的**高斯分布**将变为对数正态分布
 
-![BN_Lie_Groups](./assets/common/BN_Lie_Groups.jpg)
+![BN_Lie_Groups](BN_Lie_Groups.jpg)
 在神经网络应用中，将Spd和SO(2)看作李群，然后以流形范数（ManifoldNorm）中应用归一化算法，当流形数据不符合高斯分布时采用此种方法反而会导致性能的下降
 ## reference
 Interpreting Posterior of Gaussian Process for Regression from https://medium.com/
