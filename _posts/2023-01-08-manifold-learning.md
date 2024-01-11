@@ -213,12 +213,12 @@ $$
 
 #### Tangent ReLU（tReLU）
  其实就是将流形上的点映射到切空间，再执行非参的非线性操作
-$X \in \mathcal{M} \overset{ \mathrm{tReLU} }{{ \longrightarrow}} {\mathrm{Exp}}\_{ \mathrm{ld}}(\mathrm{ReLU} (\mathrm{Log}\_{\mathrm{ld}} (X))) \in \mathcal{M}$ 
+$X \in \mathcal{M} \overset{ \mathrm{tReLU} }{{ \longrightarrow}} \mathrm{Exp}_{ \mathrm{ld}}(\mathrm{ReLU} (\mathrm{Log}\_{\mathrm{ld}} (X))) \in \mathcal{M}$ 
   
 #### Tangent PeLU（tPReLU）
 
 将流形上的点映射到切空间，再执行参数化的非线性操作 
-$X \in \mathcal{M} \overset{\mathrm{tPReLU}}{{\longrightarrow}} {\mathrm{Exp}}\_{\mathrm{Id}}( \mathrm{PReLU}( \mathrm{Log}\_{\mathrm{Id}} (X))) \in \mathscr{M}$ 
+$X \in \mathcal{M} \overset{\mathrm{tPReLU}}{{\longrightarrow}} \mathrm{Exp}_{\mathrm{Id}}( \mathrm{PReLU}( \mathrm{Log}\_{\mathrm{Id}} (X))) \in \mathcal{M}$ 
  
 #### G-trans
 
