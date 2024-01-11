@@ -142,7 +142,7 @@ $$
 #### PCA
 
 $$
-\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\sum_{i=1}^n\lVert x_i-\mathbf{T}\mathbf{T}^{\top}x_i\rVert^2=\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\timesd},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\lVert\mathbf{X}-\mathbf{X}\mathbf{T}\mathbf{T}^{\top}\rVert_F^2 
+\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\sum_{i=1}^n\lVert x_i-\mathbf{T}\mathbf{T}^{\top}x_i\rVert^2=\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\lVert\mathbf{X}-\mathbf{X}\mathbf{T}\mathbf{T}^{\top}\rVert_F^2 
 $$
 
 #### “One shot” embedding 
@@ -189,8 +189,13 @@ $$
 如Chakraborty等人所证明的，卷积WFM层与复值标度是等变的，因为放缩旋转群 $\mathcal{R}^{+}\times SO(2) $是等距的，即它传递地作用在复平面C上。（等距群的等价性）
 #### 流形融合：输出是以黎曼距离和切线空间上的切线向量表示的特征图
 
-距离融合：输入为 $\{X_i\}_{i=1}^{N}\text{С}\mathcal{M} $，输出为 $\{d(X_i,M)\}_{i=1}^N\subset\mathbb{R}^N $，其中 $M=\mathrm{FM}(\{X_i\}) $
-切线融合：定义为在固定在恒等点的切线空间上对流形数据使用实值CNN的线性层，输入为 $\{X_i\}_{i=1}^{N}\text{С}\mathcal{M} $，产生切向量 $\mathrm{Log}_\mathrm{Id}(\{X_\mathrm{i}\})T_\mathrm{Id}\mathscr{M} $,加上一个作为映射的实值神经网络 $\mathrm{NN}:T_{\mathrm{ld}}\mathcal{M}\to\mathbb{R}^N $，输出为 $f:\mathscr{M}\to\mathbb{R}^N\mathrm{~as~}f=\mathsf{NNoLog}_{\mathbf{ld}} $将切向量转换为实数特征
+距离融合：输入为 ${X_i}_{i=1}^{N} \subet \mathcal{M}$，
+输出为{d(X_i,M)}_{i=1}^N \subset \mathbb{R}^N $，其中 $M=\mathrm{FM}(\{X_i\})$
+
+切线融合：定义为在固定在恒等点的切线空间上对流形数据使用实值CNN的线性层，输入为 $ \{X_i\}_{i=1}^{N}\text{С}\mathcal{M}$， 
+产生切向量 $ \mathrm{Log}_\mathrm{Id}(\{X_\mathrm{i}\})T_\mathrm{Id}\mathscr{M} $,
+加上一个作为映射的实值神经网络 $ \mathrm{NN}:T_{\mathrm{ld}}\mathcal{M}\to\mathbb{R}^N $，
+输出为 $ f:\mathscr{M} \to \mathbb{R}^N \mathrm{~as~}f= \mathsf{NNoLog}_{\mathbf{ld}} $将切向量转换为实数特征
 #### 欧氏融合
 在欧几里得特征级融合互补的实值输出特征图，黎曼距离+局部切向量在通道维度连接
 
@@ -201,12 +206,12 @@ $$
 3) 应用指数映射从切线空间返回到M
 
 #### Tangent ReLU（tReLU）
-其实就是将流形上的点映射到切空间，再执行非参的非线性操作 $X\in\mathscr{M}\overset{\mathrm{tReLU}}{{\longrightarrow}}\mathrm{Exp}_{\mathrm{ld}}(\mathrm{ReLU}(\mathrm{Log}_{\mathrm{ld}}(X)))\in\mathscr{M}$
+其实就是将流形上的点映射到切空间，再执行非参的非线性操作 $X \in \mathcal{M} \overset{ \mathrm{tReLU}}{{ \longrightarrow}} \mathrm{Exp}_{ \mathrm{ld}}(\mathrm{ReLU}(\mathrm{Log}_{\mathrm{ld}}(X))) \in \mathcal{M}$
 
 #### Tangent PeLU（tPReLU）
-将流形上的点映射到切空间，再执行参数化的非线性操作 $X\in\mathscr{M}\overset{\mathrm{tPReLU}}{{\longrightarrow}}\mathrm{Exp}_{\mathrm{Id}}(\mathrm{PReLU}(\mathrm{Log}_{\mathrm{Id}}(X)))\in\mathscr{M} $
+将流形上的点映射到切空间，再执行参数化的非线性操作 $X \in \mathscr{M} \overset{\mathrm{tPReLU}}{{\longrightarrow}} \mathrm{Exp}_{\mathrm{Id}}( \mathrm{PReLU}( \mathrm{Log}_{ \mathrm{Id}}(X))) \in \mathscr{M} $
 #### G-trans
-这是一种不符合上述三步过程的的参数化激活函数，它是专门为 $\mathcal{S}_{++}^1\times SO(2) $流形网络设计的，每个特征通道学习一个缩放参数和一个旋转参数，
+这是一种不符合上述三步过程的的参数化激活函数，它是专门为 $\mathcal{S}_{++}^1 \times SO(2) $流形网络设计的，每个特征通道学习一个缩放参数和一个旋转参数，
 
 ### 流形下的批归一化函数
 基于矩阵李群（Lie Groups）上的高斯分布，Chakraborty在流形范数下提出了一种封闭形式的黎曼批量归一化算法,SPD矩阵流形上的**高斯分布**将变为对数正态分布
