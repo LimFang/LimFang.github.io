@@ -64,6 +64,9 @@ $$
 称两个黎曼流形 $(\mathcal{M},g,),(\mathcal{N},h) $间的映射是等距的
 
 
+
+
+
 ### 指数和对数映射
 
 设唯一测地线 $\Gamma(t) $满足 $\Gamma(0)=p $，初始切向量 $\Gamma^{'}(0)=\mathbf{v} $，其中 $p \in \mathcal{M,\mathbf{v} \in \mathcal{T}_p \mathcal{M}} $，则在p处的指数映射定义为：
