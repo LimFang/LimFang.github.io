@@ -43,6 +43,7 @@ $$
 $$
 
 ### Orthogonal matrices 正交矩阵流形 （i.e. special orthogonal (SO) group）
+
 $$
 \mathrm{SO}(n)=\{X \in \mathbb{R}^{n\times n}\mid XX^{\mathrm{T}}=X^{\mathrm{T}}X=\mathrm{I}_n\mathrm{~and~}\det(X)=1\}.
 $$
@@ -137,6 +138,7 @@ K_{ij} &= K(\frac{\parallel x_i -x_j \parallel}{h}), x_j \in \mathcal{N}_i  \\
  &=   0,    otherwise \\
 \end{align}
 $$ 
+
 ### 范式2 Linear local approximation
 局部线性近似对于单变量函数来说，即一个微分函数可以被近似为其切线；一个多元函数，他的线性近似可以看作在该切点附近的切平面
 
@@ -149,7 +151,6 @@ C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
 $$
 
 ### 范式3 Principal curves and principal d-manifolds
-
 
 ### 范式4 Embedding algorithms
 嵌入算法的任务是生成输入的平滑映射，从而尽可能地减少邻域信息的失真
@@ -178,6 +179,7 @@ $$
 
 #### “Horseshoe” effects
 基于特征向量的方法，在数据流形具有较大的纵横比时，此类算法会失败，被称为Repeated Eigendirection Problem，在真实数据集中普遍存在。吸引-排斥算法，如t-SNE可以克服此类问题
+
 ## 3.流形学习的统计学基础
 ### Biases in ML. Effects of sampling density and graph construction
 ### Choosing the scale of neighborhood
@@ -240,5 +242,6 @@ $$
 ![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/BN_Lie_Groups.jpg?raw=true)
 
 在神经网络应用中，将Spd和SO(2)看作李群，然后以流形范数（ManifoldNorm）中应用归一化算法，当流形数据不符合高斯分布时采用此种方法反而会导致性能的下降
+
 ## reference
 Interpreting Posterior of Gaussian Process for Regression from https://medium.com/
