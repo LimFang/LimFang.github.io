@@ -55,13 +55,13 @@ $$
 
 #### 等距和等距映射
 
-- 已知光滑映射  $F:\mathcal{M} \rightarrow \mathcal{N} $，F在p的微分为 $`dF_p:\mathcal{T}_p \mathcal{M} \rightarrow \mathcal{T}_{F(p)} \mathcal{M}`$。当我们固定坐标系统， $`dF(p)`$ 变成N*M的矩阵，将  $`v\in\mathcal{T}_p \mathcal{M}`$ 映射到  $`dF_pv \in \mathcal{T}_{F(p)} \mathcal{M} `$
+- 已知光滑映射  $F:\mathcal{M} \rightarrow \mathcal{N} $，F在p的微分为 $dF_p:\mathcal{T}_p \mathcal{M} \rightarrow \mathcal{T}_{F(p)} \mathcal{M}$。当我们固定坐标系统， $dF(p)$ 变成N*M的矩阵，将  $v\in\mathcal{T}_p \mathcal{M}$ 映射到  $dF_pv \in \mathcal{T}_{F(p)} \mathcal{M} $
 
 - 当每个点p处的黎曼度量g由F保持时,即
 
 ![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/isometry.jpg)
 
-称两个黎曼流形 $`(\mathcal{M},g,),(\mathcal{N},h) `$间的映射是等距的
+称两个黎曼流形 $(\mathcal{M},g,),(\mathcal{N},h) $间的映射是等距的
 
 
 ### 指数和对数映射
@@ -73,33 +73,33 @@ Exp_p(v)=\Gamma(1)
 $$
 
 指数映射和对数映射是流形和它的切空间之间的同构映射，计算这些映射的算法依赖于感兴趣的流形和切空间的基点。
-- 给定SPD矩阵 $`\mathcal{M} \in\mathcal{S}_{++}^{d}`$，对应的**矩阵对数函数**为 $`\mathrm{logm}(\mathbf{M}):\mathcal{S}_{++}^d \rightarrow sym(d)`$：
+- 给定SPD矩阵 $\mathcal{M} \in\mathcal{S}_{++}^{d}$，对应的**矩阵对数函数**为 $\mathrm{logm}(\mathbf{M}):\mathcal{S}_{++}^d \rightarrow sym(d)$：
 
 $$
 {logm}(M)=U\log(\Sigma)U^\top 
 $$
 
-sym(d)代表dxd的对称矩阵张成的空间， $`\ddot{U\Sigma U}^{\top}=M `$
-- 给定对称矩阵 $`N \in sym(d) `$，**矩阵指数函数**为 $`expm(\mathbf{N}:sym(d)\rightarrow \mathcal{S}_{++}^d) `$：
+sym(d)代表dxd的对称矩阵张成的空间， $\ddot{U\Sigma U}^{\top}=M $
+- 给定对称矩阵 $N \in sym(d) $，**矩阵指数函数**为 $expm(\mathbf{N}:sym(d)\rightarrow \mathcal{S}_{++}^d) $：
 
 $$
 {expm}(\mathbf{N})=\mathbf{U}\exp(\mathbf{\Sigma})\mathbf{U}^\top 
 $$
 
- 其中 $`\ddot{U\Sigma U}^{\top}=\mathbf{N} `$
+ 其中 $\ddot{U\Sigma U}^{\top}=\mathbf{N} $
 ### weighted Frechet mean (wFM)
 
-给定黎曼流形  $`(\mathcal{M},g)`$ ，N个数据点 $`{X_i}_{i=1}^N \subset\mathcal{M}`$，具有凸约束的权重 $`{w_i}_{i=1}^N \subset(0,1]`$,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
+给定黎曼流形  $(\mathcal{M},g)$ ，N个数据点 ${X_i}_{i=1}^N \subset\mathcal{M}$，具有凸约束的权重 ${w_i}_{i=1}^N \subset(0,1]$,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
 
 $$wFM({X_i},{w_i})=argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)$$
 平均权重时，FM常在流形卷积、激活和归一化层中使用，作为经典欧氏均值的推广。
 
 
 ### 收回操作 （Retraction operation）
-- SPD上的收回操作,在局部刚性的条件下，从切空间回到流形上的光滑映射 $`\Gamma_{M}(\cdot):\mathcal{T}_M\mathcal{S}_{++}^d\to\mathcal{S}_{++} `$ ： $`\Gamma_M(\zeta)=M^{\frac12}\text{expm}(M^{-\frac12}\zeta M^{-\frac12})M^{\frac12} `$
-  其中， $`\zeta\in\mathbb{R}^{d\times d} `$是切空间M上的点
+- SPD上的收回操作,在局部刚性的条件下，从切空间回到流形上的光滑映射 $\Gamma_{M}(\cdot):\mathcal{T}_M\mathcal{S}_{++}^d\to\mathcal{S}_{++} $ ： $\Gamma_M(\zeta)=M^{\frac12}\text{expm}(M^{-\frac12}\zeta M^{-\frac12})M^{\frac12} $
+  其中， $\zeta\in\mathbb{R}^{d\times d} $是切空间M上的点
 ### 正交投影 （Orthogonal projection）
-黎曼流形上的正交映射是将点M的任意一个梯度转换为切空间上的黎曼梯度 $`\pi_{\mathbf{M}}(\cdot):\mathbb{R}^{d\times d}\rightarrow\mathcal{T}_{M}\mathcal{S}_{++}^{d} `$：
+黎曼流形上的正交映射是将点M的任意一个梯度转换为切空间上的黎曼梯度 $\pi_{\mathbf{M}}(\cdot):\mathbb{R}^{d\times d}\rightarrow\mathcal{T}_{M}\mathcal{S}_{++}^{d} $：
 
 $$
 \pi_M(\nabla_M)=M\frac12(\nabla_M+\nabla_M^\top)M
@@ -133,6 +133,7 @@ $$
 $$
 C=\frac{1}{n} \sum_{i=1}^n(x_i-x)(x_i-x)^T
 $$
+
 ### 范式3 Principal curves and principal d-manifolds
 
 
@@ -140,7 +141,9 @@ $$
 嵌入算法的任务是生成输入的平滑映射，从而尽可能地减少邻域信息的失真
 #### PCA
 
-$`\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\sum_{i=1}^n\lVert x_i-\mathbf{T}\mathbf{T}^{\top}x_i\rVert^2=\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\lVert\mathbf{X}-\mathbf{X}\mathbf{T}\mathbf{T}^{\top}\rVert_F^2`$
+$$
+\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\times d},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\sum_{i=1}^n\lVert x_i-\mathbf{T}\mathbf{T}^{\top}x_i\rVert^2=\min_{\mathbf{T}:\mathbf{T}\in\mathbb{R}^{D\timesd},\mathbf{T}^{\top}\mathbf{T}=\mathbf{I}_d}\lVert\mathbf{X}-\mathbf{X}\mathbf{T}\mathbf{T}^{\top}\rVert_F^2 
+$$
 
 #### “One shot” embedding 
 - Isomap
@@ -183,11 +186,11 @@ $$
 
 相位函数看作1维圆环，符合SO(2)
 ### 流形下的特征融合 （欧氏下的特征融合对比）
-如Chakraborty等人所证明的，卷积WFM层与复值标度是等变的，因为放缩旋转群 $`\mathcal{R}^{+}\times SO(2) `$是等距的，即它传递地作用在复平面C上。（等距群的等价性）
+如Chakraborty等人所证明的，卷积WFM层与复值标度是等变的，因为放缩旋转群 $\mathcal{R}^{+}\times SO(2) $是等距的，即它传递地作用在复平面C上。（等距群的等价性）
 #### 流形融合：输出是以黎曼距离和切线空间上的切线向量表示的特征图
 
-距离融合：输入为 $`\{X_i\}_{i=1}^{N}\text{С}\mathcal{M} `$，输出为 $`\{d(X_i,M)\}_{i=1}^N\subset\mathbb{R}^N `$，其中 $`M=\mathrm{FM}(\{X_i\}) `$
-切线融合：定义为在固定在恒等点的切线空间上对流形数据使用实值CNN的线性层，输入为 $`\{X_i\}_{i=1}^{N}\text{С}\mathcal{M} `$，产生切向量 $`\mathrm{Log}_\mathrm{Id}(\{X_\mathrm{i}\})T_\mathrm{Id}\mathscr{M} `$,加上一个作为映射的实值神经网络 $`\mathrm{NN}:T_{\mathrm{ld}}\mathcal{M}\to\mathbb{R}^N `$，输出为 $`f:\mathscr{M}\to\mathbb{R}^N\mathrm{~as~}f=\mathsf{NNoLog}_{\mathbf{ld}} `$将切向量转换为实数特征
+距离融合：输入为 $\{X_i\}_{i=1}^{N}\text{С}\mathcal{M} $，输出为 $\{d(X_i,M)\}_{i=1}^N\subset\mathbb{R}^N $，其中 $M=\mathrm{FM}(\{X_i\}) $
+切线融合：定义为在固定在恒等点的切线空间上对流形数据使用实值CNN的线性层，输入为 $\{X_i\}_{i=1}^{N}\text{С}\mathcal{M} $，产生切向量 $\mathrm{Log}_\mathrm{Id}(\{X_\mathrm{i}\})T_\mathrm{Id}\mathscr{M} $,加上一个作为映射的实值神经网络 $\mathrm{NN}:T_{\mathrm{ld}}\mathcal{M}\to\mathbb{R}^N $，输出为 $f:\mathscr{M}\to\mathbb{R}^N\mathrm{~as~}f=\mathsf{NNoLog}_{\mathbf{ld}} $将切向量转换为实数特征
 #### 欧氏融合
 在欧几里得特征级融合互补的实值输出特征图，黎曼距离+局部切向量在通道维度连接
 
@@ -198,10 +201,10 @@ $$
 3) 应用指数映射从切线空间返回到M
 
 #### Tangent ReLU（tReLU）
-其实就是将流形上的点映射到切空间，再执行非参的非线性操作 $`X\in\mathscr{M}\overset{\mathrm{tReLU}}{{\longrightarrow}}\mathrm{Exp}_{\mathrm{ld}}(\mathrm{ReLU}(\mathrm{Log}_{\mathrm{ld}}(X)))\in\mathscr{M}`$
+其实就是将流形上的点映射到切空间，再执行非参的非线性操作 $X\in\mathscr{M}\overset{\mathrm{tReLU}}{{\longrightarrow}}\mathrm{Exp}_{\mathrm{ld}}(\mathrm{ReLU}(\mathrm{Log}_{\mathrm{ld}}(X)))\in\mathscr{M}$
 
 #### Tangent PeLU（tPReLU）
-将流形上的点映射到切空间，再执行参数化的非线性操作 $`X\in\mathscr{M}\overset{\mathrm{tPReLU}}{{\longrightarrow}}\mathrm{Exp}_{\mathrm{Id}}(\mathrm{PReLU}(\mathrm{Log}_{\mathrm{Id}}(X)))\in\mathscr{M} `$
+将流形上的点映射到切空间，再执行参数化的非线性操作 $X\in\mathscr{M}\overset{\mathrm{tPReLU}}{{\longrightarrow}}\mathrm{Exp}_{\mathrm{Id}}(\mathrm{PReLU}(\mathrm{Log}_{\mathrm{Id}}(X)))\in\mathscr{M} $
 #### G-trans
 这是一种不符合上述三步过程的的参数化激活函数，它是专门为 $\mathcal{S}_{++}^1\times SO(2) $流形网络设计的，每个特征通道学习一个缩放参数和一个旋转参数，
 
