@@ -61,7 +61,7 @@ $$
 
 - 当每个点p处的黎曼度量g由F保持时,即
 
-![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/isometry.jpg)
+![Desktop View](https://github.com/LimFang/LimFang.github.io/blob/main/assets/common/isometry.jpg?raw=true)
 
 称两个黎曼流形 $(\mathcal{M},g,),(\mathcal{N},h) $间的映射是等距的
 
