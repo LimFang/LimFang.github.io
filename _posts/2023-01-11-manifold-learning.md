@@ -1,5 +1,5 @@
 ---
-title: manifold_learning
+title: Manifold_Learning_Introduction
 date: 2023-01-11 11:30:00 +0800
 categories: [machine learning, manifold]
 tags: [math]     # TAG names should always be lowercase
