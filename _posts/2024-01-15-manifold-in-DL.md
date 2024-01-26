@@ -1,5 +1,5 @@
 ---
-title: Gaussian + Baysien + ODE + rinemmeina manifold + GEOMETRY OF COMPLEX NUMBERS
+title: Gaussian + Bayesian + ODE + rinemmeina manifold + Geometry OF Complex Numbers
 date: 2023-01-15 11:30:00 +0800
 categories: [machine learning, manifold]
 tags: [deep learning]     # TAG names should always be lowercase
@@ -36,10 +36,10 @@ $$
 在上一点的基础上，将非零复平面 $\tilde{C}$ 视作**非零放缩**和**2D旋转**的积空间
 
 $$
-\tilde{C} \leftrightarrow \bold{R}^+ \times SO(2)
+\tilde{C} \leftrightarrow \mathbf{R}^+ \times SO(2)
 $$
 
-- 幅值函数视作1X1的SPD矩阵 $\bold{R}^+$ 
+- 幅值函数视作1X1的SPD矩阵 $\mathbf{R}^+$ 
 
 - 相位函数看作1维圆环，符合SO(2)(旋转李群)
 $$
@@ -54,7 +54,10 @@ $$
 \end{aligned}
 $$
 
-- 在积流形中距离定义为 $d(\mathbf{z}_1,\mathbf{z}_2)=\sqrt{\log^2\frac{|\mathbf{z}_2|}{|\mathbf{z}_1|}+\|\operatorname{logm}(R(\measuredangle\mathbf{z}_2)R(\measuredangle\mathbf{z}_1)^{-1})\|^2}$
+- 在积流形中距离定义为 
+$$
+d(\mathbf{z}_1,\mathbf{z}_2)=\sqrt{\log^2\frac{|\mathbf{z}_2|}{|\mathbf{z}_1|}+\|\operatorname{logm}(R(\measuredangle\mathbf{z}_2)R(\measuredangle\mathbf{z}_1)^{-1})\|^2}
+$$
 
 #### 旋转放缩在复平面上的传递性(transitive)
 定义在流形上的传递性群action：黎曼流形 $\mathcal{M}$ 和群G，单位元为e，如果存在映射 $L:G\times \mathcal{M} \rightarrow \mathcal{M}$ ,即 $(g,X) \longmapsto g.X$ 满足以下两种条件：
@@ -70,10 +73,10 @@ $$
 
 
 #### 旋转放缩在复平面上的等距性(isometric)
-即证明，在复平面 ${\bold{\tilde C}}$ 放缩和旋转能够保证流形距离, $\forall\mathbf{z}_1,\mathbf{z}_2\in\widetilde{\mathbf{C}},g\in\mathbf{R}^+\times\mathrm{SO}(2)$ :
+即证明，在复平面 ${\mathbf{\tilde C}}$ 放缩和旋转能够保证流形距离, $\forall\mathbf{z}_1,\mathbf{z}_2\in\widetilde{\mathbf{C}},g\in\mathbf{R}^+\times\mathrm{SO}(2)$ :
 
 $$
-d(g.\bold{z}_1,g.\bold{z}_2)=d(\bold{z}_1,\bold{z}_2)
+d(g.\mathbf{z}_1,g.\mathbf{z}_2)=d(\mathbf{z}_1,\mathbf{z}_2)
 $$
 
 ## Challenges
@@ -93,7 +96,7 @@ $$
 - 给定黎曼流形 $(\mathcal{M},g)$ ，N个数据点 ${X_i}_{i=1}^N \subset\mathcal{M}$，具有凸约束的权重${w_i}_{i=1}^N \subset(0,1]$ ,WFM可以定义为:找到流形上的一个点，使得加权方差的最小化：
 
 $$
-wFM({X_i},{w_i})=\argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)
+wFM({X_i},{w_i})= argmin_{m \in\mathcal{M}}\sum_{i=1}^N w_id^2(X_i,m)
 $$
 
 定义复数wFM卷积 $\tilde{*}$ ，权重为实数通过随机梯度下降学习，输出为复数，是一个加权最小均方误差过程，与复数放缩等变
@@ -101,9 +104,9 @@ $$
 
 
 ### 全连接层函数
-在分类任务中，CNN的最终表示是不随每一类的变化而变化的。需要定义一个复平面 $\tilde{\bold{C}}$ 上的FC函数，针对空间 $\bold{R}^+ \times SO(2)$ 的action具有不变性;流形距离d天然具有这种不变性，提出将对G等变的集合中每个点到它们的wFM的距离，定义为复平面上的一个新的FC函数，Distance Transform FC Layer:
+在分类任务中，CNN的最终表示是不随每一类的变化而变化的。需要定义一个复平面 $\tilde{\mathbf{C}}$ 上的FC函数，针对空间 $\mathbf{R}^+ \times SO(2)$ 的action具有不变性;流形距离d天然具有这种不变性，提出将对G等变的集合中每个点到它们的wFM的距离，定义为复平面上的一个新的FC函数，Distance Transform FC Layer:
 
-考虑s像素k通道输入，总共 $s \times c$ 个复数值，设计 $s \times c$ 个权重，首先计算出wFM点 $\bold{m}$ ，再计算每一个点到 $\bold{m}$ 的距离
+考虑s像素k通道输入，总共 $s \times c$ 个复数值，设计 $s \times c$ 个权重，首先计算出wFM点 $\mathbf{m}$ ，再计算每一个点到 $\mathbf{m}$ 的距离
 
 $$
 \begin{aligned}\mathbf{m}&=\{w_k\}\widetilde{*}\{\mathbf{t}_k\}\\u_k&=d(\mathbf{t}_k,\mathbf{m}).\end{aligned}
@@ -111,7 +114,7 @@ $$
 
 ### 流形下的非线性激活函数
 通常，通过将欧几里德激活函数集成到相应的切线空间中来形成流形激活函数有三个步骤：
-1) 应用对数映射(log for $r \in \bold{R}^+$ and logm for $R(\theta) \in SO(2)$)从流形M上的一点到其切线空间上的一点；
+1) 应用对数映射(log for $r \in \mathbf{R}^+$ and logm for $R(\theta) \in SO(2)$)从流形M上的一点到其切线空间上的一点；
 2) 在切线空间上执行欧几里得非线性函数；
 3) 应用指数映射从切线空间返回到M
 
@@ -151,8 +154,8 @@ $$
 如Chakraborty等人所证明的，卷积WFM层与复值标度是等变的，因为放缩旋转群 $\mathcal{R}^{+}\times SO(2) $是等距的，即它传递地作用在复平面C上。（等距群的等价性）
 
 #### 流形融合：输出是以黎曼距离和切线空间上的切线向量表示的特征图
-距离融合：输入为 ${X_i}_{i=1}^{N} \subset \mathcal{M}$ ,输出为 ${d(X_i,M)}_{i=1}^N \subset \mathbb{R}^N $，其中 $M=\mathrm{FM}(\{X_i\})$
-切线融合：定义为在固定在恒等点的切线空间上对流形数据使用实值CNN的线性层，输入为 $\{X_i\}_{i=1}^{N} \subset \mathcal{M}$，产生切向量 $\mathrm{Log}_\mathrm{Id}(\{X\_\mathrm{i}\})T_\mathrm{Id} \mathscr{M} $, 加上一个作为映射的实值神经网络 $\mathrm{NN}:T_{\mathrm{ld}} \mathcal{M} \to \mathbb{R}^N $，输出为 $f:\mathcal{M} \rightarrow {\mathbb{R}}^N$，即, $f={NN \circ Log}_{\mathbf{ld}}$ 将切向量转换为实数特征
+距离融合：输入为 ${X_i}\_{i=1}^{N} \subset \mathcal{M}$ ,输出为 ${d(X_i,M)}\_{i=1}^N \subset \mathbb{R}^N $，其中 $M=\mathrm{FM}(\{X_i\})$
+切线融合：定义为在固定在恒等点的切线空间上对流形数据使用实值CNN的线性层，输入为 $\{X_i\}\_{i=1}^{N} \subset \mathcal{M}$，产生切向量 $\mathrm{Log}\_\mathrm{Id}(\{X\_\mathrm{i}\})T\_\mathrm{Id} \mathscr{M} $, 加上一个作为映射的实值神经网络 $\mathrm{NN}:T_{\mathrm{ld}} \mathcal{M} \to \mathbb{R}^N $，输出为 $f:\mathcal{M} \rightarrow {\mathbb{R}}^N$，即, $f={NN \circ Log}_{\mathbf{ld}}$ 将切向量转换为实数特征
  
 #### 欧氏融合
 在欧几里得特征级融合互补的实值输出特征图，黎曼距离+局部切向量在通道维度连接
@@ -193,7 +196,7 @@ $$
 
 ### 指数与对数映射
 
-设唯一测地线$\Gamma(t)$满足$\Gamma(0)=p$，初始切向量$\Gamma^{'}(0)=\bold{v}$，其中$p \in \mathcal{M,\bold{v} \in \mathcal{T}_p \mathcal{M}}$，则在p处的指数映射定义为：
+设唯一测地线$\Gamma(t)$满足$\Gamma(0)=p$，初始切向量$\Gamma^{'}(0)=\mathbf{v}$，其中$p \in \mathcal{M,\mathbf{v} \in \mathcal{T}_p \mathcal{M}}$，则在p处的指数映射定义为：
 $$
 Exp_p(v)=\Gamma(1)
 $$
@@ -207,7 +210,7 @@ $$
 >
 >则称 $\sigma$ 是 $V$ 到 $V^{^{\prime}}$ 的同构映射(简称为同构),此时称 $V$ 与 $V^{^{\prime}}$ 是同构的，记 $V\cong V^{^{\prime}}$
 
-- 给定SPD矩阵 $\mathcal{M} \in\mathcal{S}_{++}^{d}$，对应的**矩阵对数函数**为 $\mathrm{logm}(\boldsymbol{M}):\mathcal{S}_{++}^d \rightarrow sym(d)$ ：
+- 给定SPD矩阵 $\mathcal{M} \in\mathcal{S}_{++}^{d}$，对应的**矩阵对数函数**为 $\mathrm{logm}({M}):\mathcal{S}_{++}^d \rightarrow sym(d)$ ：
 
 $$
 \operatorname{logm}(M)=U\log(\Sigma)U^\top 
@@ -215,10 +218,10 @@ $$
 
 sym(d)代表dxd的对称矩阵张成的空间，${U\Sigma U}^{\top}=M$
 
-- 给定对称矩阵 $N \in sym(d)$，其中 ${U\Sigma U}^{\top}=\bold{N}$，**矩阵指数函数**为 $expm(\bold{N}:sym(d)\rightarrow \mathcal{S}_{++}^d)$：
+- 给定对称矩阵 $N \in sym(d)$，其中 ${U\Sigma U}^{\top}=\mathbf{N}$，**矩阵指数函数**为 $expm(\mathbf{N}:sym(d)\rightarrow \mathcal{S}_{++}^d)$：
 
 $$
-\operatorname{expm}(\boldsymbol{N})=\boldsymbol{U}\exp(\boldsymbol{\Sigma})\boldsymbol{U}^\top 
+\operatorname{expm}({N})={U}\exp({\Sigma}){U}^\top 
 $$
 
 > 存在另外一种指数对数的计算公式
@@ -298,59 +301,105 @@ X\oplus Y=\lfloor X\rfloor+\lfloor Y\rfloor+\mathcal{D}(X)\mathcal{D}(Y).
 $$
 
 ### 神经流形ODE[3]
-在获取序列数据用神经网路f定义动态模型
+在获取序列数据用神经网路f定义动态模型，定义了网络参数学习的前向和后向传递梯度计算
+
+#### 前向过程 （流形上计算）
+流形上ODE的传播方式有两种：
+- 映射方法[4]
+- 隐式方法[4] [5] [7]
+
+#### 后向传播 （欧氏空间上的ODE）
+[3] 和 [7] 提出了一种有效地独立计算流形方程的**梯度**和**导数**的伴随灵敏度方法
+
+在[3]中，定义损失函数 $E:\mathcal{M} \rightarrow \mathbb{R}$ ，伴随状态 $a(t)=D_{z{t}}E$ 满足 $\frac{da(t)}{dt}=-a(t)D_z(t)f_{\Phi}(z(t),t)$，有微分方程：
+
+$$
+\frac{d \widetilde{Log}(H_t)}{dt}=D_{\widetilde{Exp}(H_t)}\widetilde{Log}(f_{\Phi}(\widetilde{Exp}(H_t),t))
+$$
+
+用数值积分技术求解 $\widetilde{Log}(H_t)$ ，以 $\epsilon$ 更新 $H_t$ ，结合起始时间和初始条件权重得到梯度（详见 [3]）
 
 ## Reference
 [1] S. Jeong, W. Ko, A. W. Mulyadi, and H.-I. Suk, “Deep Efficient Continuous Manifold Learning for Time Series Modeling,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 46, no. 1, pp. 171–184, Jan. 2024, doi: 10.1109/TPAMI.2023.3320125.
+
 [2] Z. Lin, “Riemannian Geometry of Symmetric Positive Definite Matrices via Cholesky Decomposition,” SIAM J. Matrix Anal. Appl., vol. 40, no. 4, pp. 1353–1370, Jan. 2019, doi: 10.1137/18M1221084.
+
 [3]A. Lou et al., “Neural manifold ordinary differential equations,” in Proc. Adv. Neural Inf. Process. Syst., 2020, pp. 17548–17558.
 
+[4] E. Hairer, “Solving ordinary differential equations on manifolds,” in Lecture Notes, University of Geneva, 2011.
 
+[5]P. E. Crouch and R. Grossman, “Numerical integration of ordinary differential equations on manifolds,” J. Nonlinear Sci., vol. 3, no. 1, pp. 1–33, 1993.
+
+[6] A. Bielecki, “Estimation of the Euler method error on a Riemannian manifold,” Commun. Numer. Methods Eng., vol. 18, no. 11, pp. 757–763, 2002
+
+[7] R. T. Chen, Y. Rubanova, J. Bettencourt, and D. K. Duvenaud, “Neural ordinary differential equations,” in Proc. Adv. Neural Inf. Process. Syst., 2018, pp. 6572–6583.
 
 # 3.manifold-constrained Gaussian Process for dynamic system
 
 ## Scenes and Background
+在有噪声和稀疏数据情况下，ODE表示的非线性系统的参数估计
 
-
+> In deep learning and manifold learning, a manifold constraint refers to a constraint on the parameters of a model that restricts them to lie on a smooth Riemannian manifold 1. Manifold optimization is a nonlinear optimization problem that translates the constrained optimization problem into an unconstrained optimization over the manifold, thereby generalizing many of the standard nonlinear optimization algorithms with guarantees 1.Such constraints include the popular orthogonality and rank constraints, and have been recently used in a number of applications in deep learning 1.
 
 ## Challenges
-
+- 解数值方程需要进行积分计算以及大量的时间
+- dynamic系统中可能存在未被观察的数据
 
 
 
 ## Solutions
+针对时间数据进行高斯过程建模，模型满足高斯约束：即高斯过程的导数必须满足微分方程组的动力学性质。
 
+对于一个解 $X(t)$ ，如果其先验是确定的，那么其导数的条件分布也是确定的，这与实际中普适成立的微分方程存在矛盾
 
+为解决上述矛盾问题，定义随机变量 $W$ 满足 $W=\sup_{t\in[0,T],d\in\{1,...,D\}}|\dot{X}_d(t)-\mathbf{f}(\boldsymbol{X}(t),\boldsymbol{\theta},t)_d|$ ，当 $W \equiv 0$ 即说明随机过程 $X(t)$ 与ODE一致。那么对于 $X(t)$ 的后验概率分布为：
 
+$$
+p_{\boldsymbol{\Theta},\boldsymbol{X}(t)|W,\boldsymbol{Y}(\boldsymbol{\tau})}(\boldsymbol{\theta},\boldsymbol{x}(t)|W=0,\boldsymbol{Y}(\boldsymbol{\tau})=\boldsymbol{y}(\boldsymbol{\tau}))
+$$
 
+为便于计算，将 $W$ 进行离散化，即 $W_I=\max_{t\in\boldsymbol{I},d\in\{1,...,D\}}|\dot{X}_d(t)-\mathbf{f}(\boldsymbol{X}(t),\boldsymbol{\theta},t)_d|$ ，其中 $\boldsymbol{I}=(t_1,t_2,\ldots,t_n)$ ，最终得到：
 
-# 4.manifold-regularized model for prediction improvement(Manifold alignment)
+$$
+\begin{aligned}
+&p_{\boldsymbol{\Theta},\boldsymbol{X}(\boldsymbol{I})|\boldsymbol{W}_I,\boldsymbol{Y}(\boldsymbol{\tau})}(\boldsymbol{\theta},\boldsymbol{x}(\boldsymbol{I})|\boldsymbol{W}_I=0,\boldsymbol{Y}(\boldsymbol{\tau})=\boldsymbol{y}(\boldsymbol{\tau}))&   \\
+&\propto\pi_\Theta(\boldsymbol{\theta})\exp\left\{-\frac12\sum_{d=1}^D\right[ \\
+&+\underbrace{|\boldsymbol{I}|\log(2\pi)+\log|C_d|+\|x_d(\boldsymbol{I})-\mu_d(\boldsymbol{I})\|_{C_d^{-1}}^2}_{(1)} \\
+&\underbrace{+|\boldsymbol{I}|\log(2\pi)+\log|K_d|+\left\|\mathbf{f}_{d,\boldsymbol{I}}^{\mathbf{x},\boldsymbol{\theta}}-\dot{\mu}_d(\boldsymbol{I})-m_d\{x_d(\boldsymbol{I})-\mu_d(\boldsymbol{I})\}\right\|_{K_d^{-1}}^2}_{(3)} \\
+&\left.\left.+\underbrace{N_d\log(2\pi\sigma_d^2)+\left\|x_d(\tau_d)-y_d(\tau_d)\right\|_{\sigma\frac dd^2}^2}_{(2)}\right]\right\},
+\end{aligned}
+$$
+
+# 4.manifold-regularized model for prediction improvement (Manifold alignment)
 
 
 ## Scenes and Background
-
+在多尺度机制中，多模态数据构造的复杂数据能够加深对于复杂机制的理解；
 
 
 ## Challenges
-
+- 集成和分析这样的多模态数据仍然具有挑战性，这些数据通常是**高维的**和**异质的**
+- 跨模态数据间的非线性关系常常在预测中被忽略
 
 
 
 ## Solutions
+开发出一种可解释的正则化模型，从多模态数据中进行预测
+- 1.DNN学习跨模态流形，**对齐**（align）流形特征[3]
+> 目的是保持各模间的全局一致性和局部光滑性，并揭示高阶非线性跨模间关系
 
+- 2.使用跨模态流形作为feature graph来**正则化**分类器来提升预测精度[2]
+> 相似特征在训练后应该具有相似的权重，因此我们通过每个特征与其相邻特征的加权平均的差值的平方来规则化每个特征的权重
 
+- 3.设计了一个优化算法来反向传播**Stiefel**流形上的**黎曼梯度**[4]
+> The projections onto the Stiefel manifold and the Euclidean gradient onto the tangent space of the Stiefel manifold are illustrated in Supplementary Fig. 6.
+
+## Reference
+[1] N. D. Nguyen, J. Huang, and D. Wang, “A deep manifold-regularized learning model for improving phenotype prediction from multi-modal data,” Nat Comput Sci, vol. 2, no. 1, pp. 38–46, Jan. 2022
+[2] Sandler, T., Blitzer, J., Talukdar, P. & Ungar, L. Regularized learning with networks of features. Adv. Neural Inf. Process. Syst. 21, 1401–1408 (2008).
+[3] Wang, C., Krafft, P., Mahadevan, S., Ma, Y. & Fu, Y. Manifold alignment. In Manifold Learning: Theory and Applications 95–120 (CRC, 2011).
+[4] Stiefel, E. Richtungsfelder und Fernparallelismus in n-dimensionalen Mannigfaltigkeiten. Commentarii Math. Helvetici 8, 305–353 (1935).
 
 
 # 5.Matern Gaussian process on Riemannian manifolds
 
-
-## Scenes and Background
-
-
-
-## Challenges
-
-
-
-
-## Solutions
