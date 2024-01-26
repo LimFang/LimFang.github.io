@@ -352,20 +352,20 @@ $$
 
 对于一个解 $X(t)$ ，如果其先验是确定的，那么其导数的条件分布也是确定的，这与实际中普适成立的微分方程存在矛盾
 
-为解决上述矛盾问题，定义随机变量 $W$ 满足 $W=\sup_{t\in[0,T],d\in\{1,...,D\}}|\dot{X}_d(t)-\mathbf{f}(\boldsymbol{X}(t),\boldsymbol{\theta},t)_d|$ ，当 $W \equiv 0$ 即说明随机过程 $X(t)$ 与ODE一致。那么对于 $X(t)$ 的后验概率分布为：
+为解决上述矛盾问题，定义随机变量 $W$ 满足 $W=\sup_{t\in[0,T],d\in\{1,...,D\}}|\dot{X}_d(t)-\mathbf{f}(\bfsymbol{X}(t),\bfsymbol{\theta},t)_d|$ ，当 $W \equiv 0$ 即说明随机过程 $X(t)$ 与ODE一致。那么对于 $X(t)$ 的后验概率分布为：
 
 $$
-p_{\boldsymbol{\Theta},\boldsymbol{X}(t)|W,\boldsymbol{Y}(\boldsymbol{\tau})}(\boldsymbol{\theta},\boldsymbol{x}(t)|W=0,\boldsymbol{Y}(\boldsymbol{\tau})=\boldsymbol{y}(\boldsymbol{\tau}))
+p_{\bfsymbol{\Theta},\bfsymbol{X}(t)|W,\bfsymbol{Y}(\bfsymbol{\tau})}(\bfsymbol{\theta},\bfsymbol{x}(t)|W=0,\bfsymbol{Y}(\bfsymbol{\tau})=\bfsymbol{y}(\bfsymbol{\tau}))
 $$
 
-为便于计算，将 $W$ 进行离散化，即 $W_I=\max_{t\in\boldsymbol{I},d\in\{1,...,D\}}|\dot{X}_d(t)-\mathbf{f}(\boldsymbol{X}(t),\boldsymbol{\theta},t)_d|$ ，其中 $\boldsymbol{I}=(t_1,t_2,\ldots,t_n)$ ，最终得到：
+为便于计算，将 $W$ 进行离散化，即 $W_I=\max_{t\in\bfsymbol{I},d\in\{1,...,D\}}|\dot{X}_d(t)-\mathbf{f}(\bfsymbol{X}(t),\bfsymbol{\theta},t)_d|$ ，其中 $\bfsymbol{I}=(t_1,t_2,\ldots,t_n)$ ，最终得到：
 
 $$
 \begin{aligned}
-&p_{\boldsymbol{\Theta},\boldsymbol{X}(\boldsymbol{I})|\boldsymbol{W}_I,\boldsymbol{Y}(\boldsymbol{\tau})}(\boldsymbol{\theta},\boldsymbol{x}(\boldsymbol{I})|\boldsymbol{W}_I=0,\boldsymbol{Y}(\boldsymbol{\tau})=\boldsymbol{y}(\boldsymbol{\tau}))&   \\
-&\propto\pi_\Theta(\boldsymbol{\theta})\exp\left\{-\frac12\sum_{d=1}^D\right[ \\
-&+\underbrace{|\boldsymbol{I}|\log(2\pi)+\log|C_d|+\|x_d(\boldsymbol{I})-\mu_d(\boldsymbol{I})\|_{C_d^{-1}}^2}_{(1)} \\
-&\underbrace{+|\boldsymbol{I}|\log(2\pi)+\log|K_d|+\left\|\mathbf{f}_{d,\boldsymbol{I}}^{\mathbf{x},\boldsymbol{\theta}}-\dot{\mu}_d(\boldsymbol{I})-m_d\{x_d(\boldsymbol{I})-\mu_d(\boldsymbol{I})\}\right\|_{K_d^{-1}}^2}_{(3)} \\
+&p_{\bfsymbol{\Theta},\bfsymbol{X}(\bfsymbol{I})|\bfsymbol{W}_I,\bfsymbol{Y}(\bfsymbol{\tau})}(\bfsymbol{\theta},\bfsymbol{x}(\bfsymbol{I})|\bfsymbol{W}_I=0,\bfsymbol{Y}(\bfsymbol{\tau})=\bfsymbol{y}(\bfsymbol{\tau}))&   \\
+&\propto\pi_\Theta(\bfsymbol{\theta})\exp\left\{-\frac12\sum_{d=1}^D\right[ \\
+&+\underbrace{|\bfsymbol{I}|\log(2\pi)+\log|C_d|+\|x_d(\bfsymbol{I})-\mu_d(\bfsymbol{I})\|_{C_d^{-1}}^2}_{(1)} \\
+&\underbrace{+|\bfsymbol{I}|\log(2\pi)+\log|K_d|+\left\|\mathbf{f}_{d,\bfsymbol{I}}^{\mathbf{x},\bfsymbol{\theta}}-\dot{\mu}_d(\bfsymbol{I})-m_d\{x_d(\bfsymbol{I})-\mu_d(\bfsymbol{I})\}\right\|_{K_d^{-1}}^2}_{(3)} \\
 &\left.\left.+\underbrace{N_d\log(2\pi\sigma_d^2)+\left\|x_d(\tau_d)-y_d(\tau_d)\right\|_{\sigma\frac dd^2}^2}_{(2)}\right]\right\},
 \end{aligned}
 $$
