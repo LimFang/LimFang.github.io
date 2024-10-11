@@ -11,7 +11,7 @@ Blog: Occasional write-ups on tech trends, challenges faced in my projects, and 
 ## Key Projects
 Coming soon
 
-### Get in Touch
+## Get in Touch
 Feel free to reach out if you’d like to collaborate on projects, discuss research ideas, or just chat about technology! You can find me on:
 
-GitHub: LimFang
+GitHub: [LimFang](https://github.com/LimFang/LimFang.github.io)
