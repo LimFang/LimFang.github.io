@@ -35,9 +35,7 @@ $$
 ### 放缩旋转 积流形
 在上一点的基础上，将非零复平面 $\tilde{C}$ 视作**非零放缩**和**2D旋转**的积空间
 
-$$
-\tilde{C} \leftrightarrow \mathbf{R}^+ \times SO(2)
-$$
+$$\tilde{C} \leftrightarrow \mathbf{R}^+ \times SO(2)$$
 
 - 幅值函数视作1X1的SPD矩阵 $\mathbf{R}^+$ 
 
