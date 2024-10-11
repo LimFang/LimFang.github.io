@@ -3,6 +3,7 @@ title: SFT RLHF DPO
 date: 2024-10-10 11:30:00 +0800
 categories: [Fine-tuneing, theory]
 tags: [LLM]     # TAG names should always be lowercase
+math: true
 ---
 
 # SFT RLHF DPO
