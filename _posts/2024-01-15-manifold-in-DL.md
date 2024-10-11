@@ -5,7 +5,9 @@ categories: [machine learning, manifold]
 tags: [deep learning]     # TAG names should always be lowercase
 math: true
 ---
-
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 # 1.SCALING–ROTATION MANIFOLD FOR THE GEOMETRY OF COMPLEX NUMBERS
 
 ## Scenes and Background
