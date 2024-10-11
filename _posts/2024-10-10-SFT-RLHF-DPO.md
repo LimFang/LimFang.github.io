@@ -79,7 +79,7 @@ SFT的数据一般在2k-10k之间；SFT的数据在准确，不在量大。另�
 - Reward
 - Cumulative Reward
 
-### 2.1.1 Reward model
+### 2.2 Reward model
 
 RLHF的Reward是通过一个**Reward model模型生成**，Reward model最好和agent的model能力相似，能对agent的结果进行打分(**判别式排序**)。模型太大可能面临资源消耗过大，训练不稳定等,Reward model一般也是一个**参数量较小**的transformer模型（instructGPT的Reward_model：GPT-3-6B，deepspeed中的OPT-13B的Reward_model：OPT-350M）
 
@@ -89,7 +89,7 @@ $$Loss(\theta)=-\frac{1}{2}E_{(x,y_w,y_l)\sim D}[log(\sigma(r_\theta(x,y_w)-r_\t
 
 其中，$x$是prompt，$y_w$和$y_l$分别是较好和较差的模型response，$r_\theta(x,y)$是Reward Model的输出，$\sigma$ 是sigmod函数$^{+}$，训练奖励模型实际上就是最大化 $P(y_w>y_l|x)$由于 r ( x , y ) r(x,y)r(x,y) 可能是负数，因此在使用Bradley-Terry建模时，需要预先过一下softmax。
 
-### 2.1.2 PPO算法
+### 2.3 PPO算法
 PG算法的核心是用“Reward”作为权重，**最大化策略网络所做出的动作的概率**。
 ![PG](../assets/LLM/PG.png "PG")
 
@@ -105,14 +105,14 @@ Critic网络会生成一个期望奖励，只有真实获得的reward比期望�
 $\cdot$ $\gamma$ 是折扣因子$^{+}$
 $\cdot$ $\lambda$ 是一个在[0,1] 范围内的平滑因子$^{+}$,控制偏差和方差的权衡。
 $\cdot$ $V_{s_t}$是状态 st 的估计值。
-### 2.1.3 PPO修正
+### 2.4 PPO修正
 AC算法存在稳定性问题，特别是深度模型。为了优化这一点PPO算法的做法包括两种，一种是：用拉格朗日乘数法直接将 KL 散度的限制放进了目标函数中，这就变成了一个无约束的优化问题，在迭代的过程中不断更新 KL 散度前的系数：
 $$\arg\max\mathbb{E}_{s\sim\nu^{\pi_{\theta_k}}}\mathbb{E}_{a\sim\pi_{\theta_k}(\cdot|s)}\left[\frac{\pi_\theta(a|s)}{\pi_{\theta_k}(a|s)}A^{\pi_{\theta_k}}(s,a)-\beta D_{KL}[\pi_{\theta_k}(\cdot|s),\pi_\theta(\cdot|s)]\right]$$
 
 另一种做法比较简单直接，在目标函数中进行限制，以保证新的参数和旧的参数的差距不会太大：
 $$\arg\max_{\theta}\mathbb{E}_{s\sim\nu}\mathbb{E}_{\theta_{k}}\mathbb{E}_{a\sim\pi_{\theta_{k}}(\cdot|s)}\left[\min\left(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{k}}(a|s)}A^{\pi_{\theta_{k}}}(s,a),\mathrm{clip}\left(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{k}}(a|s)},1-\epsilon,1+\epsilon\right)A^{\pi_{\theta_{k}}}(s,a)\right)\right]$$
 
-### 2.1.3 RLHF的PPO
+### 2.5 RLHF的PPO
 LLM PPO需要三个模型网络：**RM、actor_model(SFT后的LLM)、critic_model**引入了一个网络来控制一下actor_model让它更新不要太偏离原本的SFT后的LLM，所以通过KL散度（作用是控制两个分布之间的差异），损失变为：
 $$loss=\max_{\pi_\theta}\left\{\mathbb{E}_{x\sim\mathcal{D},y\sim\pi_\theta(y|x)}[r_\phi(x,y)]-\lambda\mathbb{D}_{\mathrm{KL}}[\pi_\theta(y|x)||\pi_{\mathrm{ref}}(y|x)]\right\}$$
 
