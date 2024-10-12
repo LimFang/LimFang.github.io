@@ -1,5 +1,5 @@
 ---
-title: Transformer+In-Hand-COde
+title: Transformer+In-Hand-Code
 date: 2024-10-12 11:30:00 +0800
 categories: [Fine-tuning,Tiny Transformer]
 tags: [LLM]     # TAG names should always be lowercase
@@ -8,6 +8,7 @@ math: true
 
 # Transformer+In-Hand
 
+[参考资料](https://github.com/datawhalechina/tiny-universe/tree/main/content/TinyTransformer)
 
 
 ## Attention Mechaism
