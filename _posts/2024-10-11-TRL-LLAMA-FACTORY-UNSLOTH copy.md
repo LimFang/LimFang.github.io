@@ -11,7 +11,8 @@ math: true
 
 
 ## Transformer Reinforcement Learning
-[TRL参考资料](https://github.com/huggingface/trl)
+[TRL Github参考](https://github.com/huggingface/trl)
+[强化学习TRL包源码解读](https://www.bilibili.com/video/BV1RG411y71U)
 
 目前(2024.10.11)llamafactory 0.9.1与trl 0.11.2冲突
 
@@ -29,6 +30,10 @@ math: true
 但是这只是让大模型用到这是数据，大模型内部并没有关于这方面的知识。
 
 [RAG+QWEN2](https://www.youtube.com/watch?v=d9o2QU7gdu8)
+
+[Tiny手搓RAG](https://github.com/datawhalechina/tiny-universe/tree/main/content/TinyRAG)
+
+
 
 ## UNSLOTH
 
