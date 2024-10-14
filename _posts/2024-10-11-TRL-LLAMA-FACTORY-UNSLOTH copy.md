@@ -18,7 +18,8 @@ math: true
 
 
 ## LLaMA-Factory
-[LLaMA-Factory参考资料](https://github.com/hiyouga/LLaMA-Factory)
+[LLaMA-Factory Github](https://github.com/hiyouga/LLaMA-Factory)
+[LLaMA Factory创始人讲述：从预训练到RLHF的高效实现](https://www.bilibili.com/video/BV1Gt421L7dt)
 [GIT参考资料](https://github.com/InternLM/Tutorial/tree/camp3/docs/L0/Git)
 目前(2024.10.11)llamafactory 0.9.1与trl 0.11.2冲突
 打开的UI界面如下
