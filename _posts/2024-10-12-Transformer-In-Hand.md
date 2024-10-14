@@ -1,7 +1,7 @@
 ---
 title: Transformer+In-Hand-Code
 date: 2024-10-12 11:30:00 +0800
-categories: [machine learning,Tiny Transformer]
+categories: [machine learning,Base]
 tags: [LLM]     # TAG names should always be lowercase
 math: true
 ---
