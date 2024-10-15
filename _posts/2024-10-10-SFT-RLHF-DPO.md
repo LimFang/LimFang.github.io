@@ -81,6 +81,8 @@ SFT的数据一般在2k-10k之间；SFT的数据在准确，不在量大。另�
 
 ### 2.2 Reward model
 
+[训练后RM,评估](https://github.com/allenai/reward-bench)
+
 RLHF的Reward是通过一个**Reward model模型生成**，Reward model最好和agent的model能力相似，能对agent的结果进行打分(**判别式排序**)。模型太大可能面临资源消耗过大，训练不稳定等,Reward model一般也是一个**参数量较小**的transformer模型（instructGPT的Reward_model：GPT-3-6B，deepspeed中的OPT-13B的Reward_model：OPT-350M）
 
 训练：在一个batch里面，把每个Prompt对应的所有的模型输出，都过一遍Reward model，并把所有两两组合都比较一遍。比如一个Prompt有$K$个模型输出，那么模型则只需要处理$K$个样本就可以一气儿做$C_2^k$次比较。损失函数为：
@@ -98,13 +100,23 @@ PG算法的核心是用“Reward”作为权重，**最大化策略网络所做�
 由于**采样的稀疏性**，我们引入Actor-Critic算法
 ![AC](../assets/LLM/AC.png "AC")
 
-Actor指的是策略网络$\pi_\theta$; Critic网络 $b_\phi$ 目的就是给定一个$\pi_\theta$，预估每个状态 $s_t$ ,$\pi_\theta$奖励 $b_\phi(s_t)$是多少。Critic网络的更新通过优势函数（Advantage Function）来更新 (即：Critic 通过计算实际获得的奖励与预测价值的差异(通常使用 TD 误差)来更新其价值函数)。
+Actor指的是策略网络$\pi_\theta$，是我们想要训练的目标语言模型; Critic网络 $b_\phi$ 目的就是预估每个状态$s_t$ ,$\pi_\theta$奖励 $b_\phi(s_t)$是多少。
+
+$$actor\_loss=\sum_{t=1}^{T}A_t\pi_{\theta}(a_t|s_t)$$ 
+
+Critic网络的更新通过优势函数（Advantage Function）来更新 (即：Critic 通过计算实际获得的奖励与预测价值的差异(通常使用 TD 误差)来更新其价值函数)。
+
+$$Critic\_loss=\sum_{t=1}^{T}A_t\pi_{\theta}(a_t|s_t)$$ 
+
 Critic网络会生成一个期望奖励，只有真实获得的reward比期望奖励好，动作才会被优化，否则抑制它
 - Advantage Function通过平衡偏差和方差来提高策略梯度方法的稳定性和效率：$A_t^\lambda=\sum_{k=0}^\infty(\gamma\lambda)^k\delta_t^{(k)}$
   $\cdot$ $\delta_t=r_t+\gamma V_{s_{t+1}}-V_{s_t}$是时刻$t$的优势估计
-$\cdot$ $\gamma$ 是折扣因子$^{+}$
+$\cdot$ $\gamma$ 是折扣因子
 $\cdot$ $\lambda$ 是一个在[0,1] 范围内的平滑因子$^{+}$,控制偏差和方差的权衡。
-$\cdot$ $V_{s_t}$是状态 st 的估计值。
+$\cdot$ $V_{s_t}$是状态$s_t$的估计值。
+
+![RLHF+PPO](../assets/LLM/RLHF+PPO.png "RLHF+PPO")
+
 ### 2.4 PPO修正
 AC算法存在稳定性问题，特别是深度模型。为了优化这一点PPO算法的做法包括两种，一种是：用拉格朗日乘数法直接将 KL 散度的限制放进了目标函数中，这就变成了一个无约束的优化问题，在迭代的过程中不断更新 KL 散度前的系数：
 $$\arg\max\mathbb{E}_{s\sim\nu^{\pi_{\theta_k}}}\mathbb{E}_{a\sim\pi_{\theta_k}(\cdot|s)}\left[\frac{\pi_\theta(a|s)}{\pi_{\theta_k}(a|s)}A^{\pi_{\theta_k}}(s,a)-\beta D_{KL}[\pi_{\theta_k}(\cdot|s),\pi_\theta(\cdot|s)]\right]$$
@@ -141,4 +153,118 @@ $$loss=\max_{\pi_\theta}\left\{\mathbb{E}_{(x,y_{\mathrm{win}},y_{\mathrm{lose}}
  
 ## 4 总结
 
+### 4.1 sft数据格式
+```python
+[
+    {
+        "instruction": "<question>:查看备案有效期在今天之后的委托信息\nCREATE TABLE 委托备案信息 (序号 FLOAT,\n委托企业名称 VARCHAR(255),\n公司地址 VARCHAR(255),\n被委托企业名称 VARCHAR(255),\n委托产品名称 VARCHAR(255),\n备案日期 VARCHAR(255),\n备案有效期 VARCHAR(255));",
+        "input": "",
+        "output": "\nSELECT * FROM 委托备案信息 WHERE TO_DATE(备案有效期, 'YYYY-MM-DD') > NOW();\n"
+    },
+    {
+        "instruction": "<question>:哪些镇名拥有重点旅游村？\nCREATE TABLE 镇名休闲农业园区休闲农庄重点旅游村 (镇名 VARCHAR(255),\n休闲农业园区 VARCHAR(255),\n休闲农庄 VARCHAR(255),\n重点旅游村 VARCHAR(255));",
+        "input": "",
+        "output": "\nSELECT DISTINCT 镇名 FROM 镇名休闲农业园区休闲农庄重点旅游村 WHERE 重点旅游村 IS NOT NULL;\n"
+    },
+    ...
+]
+
+```
+
+### 4.2 RM数据格式
+```python
+[
+    {
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<question>:查看备案有效期在今天之后的委托信息\nCREATE TABLE 委托备案信息 (序号 FLOAT,\n委托企业名称 VARCHAR(255),\n公司地址 VARCHAR(255),\n被委托企业名称 VARCHAR(255),\n委托产品名称 VARCHAR(255),\n备案日期 VARCHAR(255),\n备案有效期 VARCHAR(255));"
+            }
+        ],
+        "chosen": {
+            "from": "gpt",
+            "value": "\nSELECT * FROM 委托备案信息 WHERE TO_DATE(备案有效期, 'YYYY-MM-DD') > NOW();\n"
+        },
+        "rejected": {
+            "from": "gpt",
+            "value": "SELECT * FROM 委托备案信息 WHERE 备案有效期 > NOW()"
+        }
+    },
+    {
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<question>:哪些镇名拥有重点旅游村？\nCREATE TABLE 镇名休闲农业园区休闲农庄重点旅游村 (镇名 VARCHAR(255),\n休闲农业园区 VARCHAR(255),\n休闲农庄 VARCHAR(255),\n重点旅游村 VARCHAR(255));"
+            }
+        ],
+        "chosen": {
+            "from": "gpt",
+            "value": "\nSELECT DISTINCT 镇名 FROM 镇名休闲农业园区休闲农庄重点旅游村 WHERE 重点旅游村 IS NOT NULL;\n"
+        },
+        "rejected": {
+            "from": "gpt",
+            "value": "SELECT DISTINCT 镇名 FROM PG库 WHERE 重点旅游村 IS NOT NULL;"
+        }
+    },
+    ...
+]
+
+
+```
+
+### 4.3 LLama Factory(to be optimized)
+```python
+if __name__ == "__main__":
+    #1.sft指令微调
+    # yaml_path = '../examples/yblir_configs/qwen2_lora_sft.yaml'
+    #qwen2_lora_sft_merge.yaml
+    # 2.奖励模型训练
+    # yaml_path = '../examples/yblir_configs/qwen2_lora_reward.yaml'
+    # 3.rlhf-ppo训练
+    yaml_path = '../examples/yblir_configs/qwen2_lora_ppo.yaml'
+    # 4.inference
+    #lyb_qwen_sft_predict.yaml
+	
+    main(yaml_path)   
+
+```
+
+### 4.4 Training Loss
+监督微调（Supervised Fine-Tuning, SFT）、奖励建模（Reward Modeling, RM）和基于强化学习的微调（Reinforcement Learning from Human Feedback, RLHF）三种方法及其对应的损失函数的详细说明：
+
+#### 4.4.1 监督微调（Supervised Fine-Tuning, SFT）
+
+**目的**：通过标注数据对预训练模型进行微调，使其在特定任务上表现更好。
+
+**损失函数**：通常使用交叉熵损失（Cross-Entropy Loss）。
+
+- **公式**：
+  \[
+  \mathcal{L}_{\text{SFT}} = -\frac{1}{N} \sum_{i=1}^{N} \sum_{t=1}^{T} y_{i,t} \log(p_{i,t})
+  \]
+  其中，\( N \) 是样本数量，\( T \) 是每个样本的序列长度，\( y_{i,t} \) 是第 \( i \) 个样本在第 \( t \) 个位置的真实标签，\( p_{i,t} \) 是模型预测的概率。
+
+#### 4.4.2 奖励建模（Reward Modeling, RM）
+
+**目的**：训练一个奖励模型，该模型能够评估生成的文本或代码的质量。
+
+**损失函数**：通常使用均方误差损失（Mean Squared Error, MSE）或交叉熵损失。
+
+- **公式**：
+  \[
+  \mathcal{L}_{\text{RM}} = \frac{1}{N} \sum_{i=1}^{N} (R_i - \hat{R}_i)^2
+  \]
+  其中，\( N \) 是样本数量，\( R_i \) 是第 \( i \) 个样本的人类评分，\( \hat{R}_i \) 是奖励模型预测的评分。
+
+#### 4.4.3 基于强化学习的微调（Reinforcement Learning from Human Feedback, RLHF）
+
+**目的**：使用强化学习（特别是策略梯度方法）进一步优化模型，使其生成的文本或代码更加符合人类的偏好。
+
+**损失函数**：通常使用策略梯度方法中的代理损失（Proxy Loss），如近端策略优化（Proximal Policy Optimization, PPO）。
+
+- **PPO损失**：
+  \[
+  \mathcal{L}_{\text{PPO}} = \min\left( r_t(\theta) A_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) A_t \right)
+  \]
+  其中，\( r_t(\theta) = \frac{\pi_\theta(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)} \) 是策略比，\( A_t \) 是优势函数，\( \epsilon \) 是裁剪参数。
 
