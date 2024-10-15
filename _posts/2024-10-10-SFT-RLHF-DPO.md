@@ -153,62 +153,34 @@ $$loss=\max_{\pi_\theta}\left\{\mathbb{E}_{(x,y_{\mathrm{win}},y_{\mathrm{lose}}
  
 ## 4 总结
 
-### 4.1 sft数据格式
+### 4.1 [sft数据格式](https://github.com/hiyouga/LLaMA-Factory/tree/main/data)
 ```python
 [
-    {
-        "instruction": "<question>:查看备案有效期在今天之后的委托信息\nCREATE TABLE 委托备案信息 (序号 FLOAT,\n委托企业名称 VARCHAR(255),\n公司地址 VARCHAR(255),\n被委托企业名称 VARCHAR(255),\n委托产品名称 VARCHAR(255),\n备案日期 VARCHAR(255),\n备案有效期 VARCHAR(255));",
-        "input": "",
-        "output": "\nSELECT * FROM 委托备案信息 WHERE TO_DATE(备案有效期, 'YYYY-MM-DD') > NOW();\n"
-    },
-    {
-        "instruction": "<question>:哪些镇名拥有重点旅游村？\nCREATE TABLE 镇名休闲农业园区休闲农庄重点旅游村 (镇名 VARCHAR(255),\n休闲农业园区 VARCHAR(255),\n休闲农庄 VARCHAR(255),\n重点旅游村 VARCHAR(255));",
-        "input": "",
-        "output": "\nSELECT DISTINCT 镇名 FROM 镇名休闲农业园区休闲农庄重点旅游村 WHERE 重点旅游村 IS NOT NULL;\n"
-    },
-    ...
+  {
+    "instruction": "human instruction (required)",
+    "input": "human input (optional)",
+    "output": "model response (required)",
+    "system": "system prompt (optional)",
+    "history": [
+      ["human instruction in the first round (optional)", "model response in the first round (optional)"],
+      ["human instruction in the second round (optional)", "model response in the second round (optional)"]
+    ]
+  }
 ]
 
 ```
 
 ### 4.2 RM数据格式
 ```python
+#Alpaca Format
 [
-    {
-        "conversations": [
-            {
-                "from": "human",
-                "value": "<question>:查看备案有效期在今天之后的委托信息\nCREATE TABLE 委托备案信息 (序号 FLOAT,\n委托企业名称 VARCHAR(255),\n公司地址 VARCHAR(255),\n被委托企业名称 VARCHAR(255),\n委托产品名称 VARCHAR(255),\n备案日期 VARCHAR(255),\n备案有效期 VARCHAR(255));"
-            }
-        ],
-        "chosen": {
-            "from": "gpt",
-            "value": "\nSELECT * FROM 委托备案信息 WHERE TO_DATE(备案有效期, 'YYYY-MM-DD') > NOW();\n"
-        },
-        "rejected": {
-            "from": "gpt",
-            "value": "SELECT * FROM 委托备案信息 WHERE 备案有效期 > NOW()"
-        }
-    },
-    {
-        "conversations": [
-            {
-                "from": "human",
-                "value": "<question>:哪些镇名拥有重点旅游村？\nCREATE TABLE 镇名休闲农业园区休闲农庄重点旅游村 (镇名 VARCHAR(255),\n休闲农业园区 VARCHAR(255),\n休闲农庄 VARCHAR(255),\n重点旅游村 VARCHAR(255));"
-            }
-        ],
-        "chosen": {
-            "from": "gpt",
-            "value": "\nSELECT DISTINCT 镇名 FROM 镇名休闲农业园区休闲农庄重点旅游村 WHERE 重点旅游村 IS NOT NULL;\n"
-        },
-        "rejected": {
-            "from": "gpt",
-            "value": "SELECT DISTINCT 镇名 FROM PG库 WHERE 重点旅游村 IS NOT NULL;"
-        }
-    },
-    ...
+  {
+    "instruction": "human instruction (required)",
+    "input": "human input (optional)",
+    "chosen": "chosen answer (required)",
+    "rejected": "rejected answer (required)"
+  }
 ]
-
 
 ```
 
