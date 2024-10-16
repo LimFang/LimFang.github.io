@@ -211,22 +211,21 @@ if __name__ == "__main__":
 **损失函数**：通常使用交叉熵损失（Cross-Entropy Loss）。
 
 - **公式**：
-  \[
+  $$
   \mathcal{L}_{\text{SFT}} = -\frac{1}{N} \sum_{i=1}^{N} \sum_{t=1}^{T} y_{i,t} \log(p_{i,t})
-  \]
-  其中，\( N \) 是样本数量，\( T \) 是每个样本的序列长度，\( y_{i,t} \) 是第 \( i \) 个样本在第 \( t \) 个位置的真实标签，\( p_{i,t} \) 是模型预测的概率。
+  $$
+
+  其中，$N$ 是样本数量，$ T$ 是每个样本的序列长度，$ y_{i,t}$ 是第 $ i$ 个样本在第 $ t$ 个位置的真实标签，$ p_{i,t}$ 是模型预测的概率。
 
 #### 4.4.2 奖励建模（Reward Modeling, RM）
 
 **目的**：训练一个奖励模型，该模型能够评估生成的文本或代码的质量。
 
-**损失函数**：通常使用均方误差损失（Mean Squared Error, MSE）或交叉熵损失。
+**损失函数**
 
 - **公式**：
-  \[
-  \mathcal{L}_{\text{RM}} = \frac{1}{N} \sum_{i=1}^{N} (R_i - \hat{R}_i)^2
-  \]
-  其中，\( N \) 是样本数量，\( R_i \) 是第 \( i \) 个样本的人类评分，\( \hat{R}_i \) 是奖励模型预测的评分。
+$$Loss(\theta)=-\frac{1}{2}E_{(x,y_w,y_l)\sim D}[log(\sigma(r_\theta(x,y_w)-r_\theta(x,y_l)))]$$
+
 
 #### 4.4.3 基于强化学习的微调（Reinforcement Learning from Human Feedback, RLHF）
 
@@ -235,8 +234,6 @@ if __name__ == "__main__":
 **损失函数**：通常使用策略梯度方法中的代理损失（Proxy Loss），如近端策略优化（Proximal Policy Optimization, PPO）。
 
 - **PPO损失**：
-  \[
-  \mathcal{L}_{\text{PPO}} = \min\left( r_t(\theta) A_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) A_t \right)
-  \]
-  其中，\( r_t(\theta) = \frac{\pi_\theta(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)} \) 是策略比，\( A_t \) 是优势函数，\( \epsilon \) 是裁剪参数。
+$$loss=\max_{\pi_\theta}\left\{\mathbb{E}_{x\sim\mathcal{D},y\sim\pi_\theta(y|x)}[r_\phi(x,y)]-\lambda\mathbb{D}_{\mathrm{KL}}[\pi_\theta(y|x)||\pi_{\mathrm{ref}}(y|x)]\right\}$$
+  
 
