@@ -95,7 +95,12 @@ $$Loss(\theta)=-\frac{1}{2}E_{(x,y_w,y_l)\sim D}[log(\sigma(r_\theta(x,y_w)-r_\t
 PG算法的核心是用“Reward”作为权重，**最大化策略网络所做出的动作的概率**。
 ![PG](../assets/LLM/PG.png "PG")
 
-用策略网络$\pi_\theta$**采样出一个轨迹**，然后根据即刻得到的reward $r_t$计算discounted reward$R_t= \sum _{i= t}^T\gamma ^{i- t}r_i$ (未来奖励);用$R_t$作为权重，最大化这个轨迹下所采取的动作的概率$log(\pi(\overline{a_t}|s_t))\cdot R_t$ ,用梯度上升优化之。
+用策略网络$\pi_\theta$**采样出一个轨迹**，然后根据即刻得到的reward $r_t$ 计算discounted reward$R_t= \sum _{i= t}^T\gamma ^{i- t}r_i$ (未来奖励);用$R_t$作为权重，最大化这个轨迹下所采取的动作的概率$log(\pi({a_t}|s_t))R_t$ ,用梯度上升优化之。
+
+举例对话生成任务，模型生成的轨迹可以这样定义：
+- 状态（输入）：给定的对话上下文 $s_0$，例如 "How is the weather today?"
+- 动作（生成的回复）：模型根据策略 $\pi_{\theta}$ 生成多个单词序列（动作），比如“It's sunny and warm today”。第一步生成 "It's"作为 $a_0$，第二步将输入和已生成的次作为新的状态 $s_1$ ，生成 "sunny" 作为 $a_1$ 
+- 奖励：根据人类反馈或奖励模型，给出对这条回复的reward $r_t$（如评分）
 
 由于**采样的稀疏性**，我们引入Actor-Critic算法
 ![AC](../assets/LLM/AC.png "AC")
@@ -144,7 +149,11 @@ $$loss=\max_{\pi_\theta}\left\{\mathbb{E}_{x\sim\mathcal{D},y\sim\pi_\theta(y|x)
 
 
 ### 3.1 什么是DPO
-**直接偏好优化**（Direct Preference Optimization, DPO）是一种不需要强化学习的对齐算法。由于去除了复杂的强化学习算法，DPO 可以通过与有监督微调（SFT）相似的复杂度实现模型对齐，不再需要在训练过程中针对大语言模型进行采样，同时超参数的选择更加容易。DPO是介于SFT和RLHF之间的，并不是完全的RLHF的替代，相当于RLHF的轻量版（模型数量少了一倍），DPO主要是去掉了Reward model，通过优化损失函数实现直接偏好策略控制。
+**直接偏好优化**（Direct Preference Optimization, DPO）是一种不需要强化学习的对齐算法。由于去除了复杂的强化学习算法，DPO 可以通过与SFT相似的复杂度实现模型对齐，不再需要在训练过程中针对大语言模型进行采样，同时超参数的选择更加容易。
+
+DPO是介于SFT和RLHF之间的，并不是完全的RLHF的替代，相当于RLHF的轻量版（模型数量少了一倍），DPO主要是去掉了Reward model，通过优化损失函数实现直接偏好策略控制。
+
+在 DPO 中，模型的优化过程不再需要依赖环境的轨迹采样，而是基于已存在的偏好对（preference pairs）。每对偏好对 $(y_w,y_l)$ 由人类提供，其中 $y_w$ 是被偏好的输出,  $y_l$是不被偏好的输出,模型的优化是基于监督信号（偏好数据）而非环境交互(需要人类给出足够的偏好信息)
 
 ### [3.2 DPO损失函数](https://zhuanlan.zhihu.com/p/671780768)
 DPO模型由两个大模型组成，一是SFT后的LLM需要学习的模型；第二个和RLHF中一样需要一个ref模型，**防止模型跑偏**，结构也是SFT后的LLM，参数冻结
