@@ -7,7 +7,7 @@ math: true
 ---
 
 # REPOAUDIT: An Autonomous LLM-Agent for Repository-Level Code Auditing
-![REPOAUDIT](../assets/LLM/REPOAUDIT.png.png "REPOAUDIT")
+![RLHF3](../assets/LLM/REPOAUDIT.png.png "REPOAUDIT")
 ## 动机
 1. **代码审计的迫切需求与挑战**  
    - **代码库规模爆炸**：现代软件系统代码量指数级增长，人工审计难以应对（如大型开源项目或企业级代码库）。
@@ -21,7 +21,6 @@ math: true
    - **局部分析工具**（如AST扫描器）：仅能检测简单漏洞（如语法错误），无法处理跨函数、跨文件的路径敏感漏洞（如CWE-121、CWE-78）。
    - **传统符号执行工具**：依赖SMT求解器验证路径条件，但面临路径爆炸、复杂约束建模困难（如动态内存操作）。
    - **LLM直接应用**：缺乏对代码库结构的系统性建模，易生成误报（如忽略跨函数条件矛盾）。
-   - **LLM优势**: 程序抽象、指针处理、可行程序路径探索
 
 ---
 
@@ -91,8 +90,3 @@ REPOAUDIT通过**代理协同**与**LLM的路径敏感推理**，实现了高效
 2. **跨函数数据流追踪**：结合LLM的抽象能力与代理内存，实现全局路径拼接。  
 3. **矛盾检测与误报过滤**：通过LLM验证路径条件一致性，提升报告质量。  
 该方法为自动化代码审计提供了新范式，尤其在处理路径敏感漏洞时表现显著优势。
-
-### 额外参考文献
-- pathsensitive bugs：Qingkai Shi, Xiao Xiao, Rongxin Wu, Jinguo Zhou, Gang Fan, and Charles Zhang. Pinpoint: fast and precise sparse value flow analysis for million lines of code. In Jeffrey S. Foster and Dan Grossman, editors, Proceedings of the 39th ACM SIGPLAN Conference on Programming Language Design and Implementation, PLDI 2018, Philadelphia, PA, USA, June 18-22, 2018, pages 693–706. ACM, 2018a. doi: 10.1145/3192366.3192418.
-- data dependence graph：Jeanne Ferrante, Karl J Ottenstein, and Joe D Warren. The program dependence graph and its use in optimization. In International Symposium on Programming, pages 125132. Springer, 1984.
-- points-to analysis：Yannis Smaragdakis, George Balatsouras, et al. Pointer analysis. Foundations and Trends® in Programming Languages, 2(1):1–69, 2015.
