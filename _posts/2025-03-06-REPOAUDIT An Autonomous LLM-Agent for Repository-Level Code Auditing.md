@@ -1,5 +1,5 @@
 ---
-title: REPOAUDIT: An Autonomous LLM-Agent for Repository-Level Code Auditing
+title: REPOAUDIT An Autonomous LLM-Agent for Repository-Level Code Auditing
 date: 2025-03-06 11:30:00 +0800
 categories: [agent,code]
 tags: [LLM]     # TAG names should always be lowercase
