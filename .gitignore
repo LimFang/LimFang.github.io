@@ -17,6 +17,7 @@ package-lock.json
 # IDE configurations
 .idea
 .vscode
+.history
 
 # Misc
 assets/js/dist
