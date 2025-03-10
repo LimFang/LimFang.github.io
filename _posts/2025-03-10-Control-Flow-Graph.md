@@ -7,7 +7,7 @@ math: true
 ---
 
 
-# Control Flow Graph (CFG) - Program Analysis
+# Control Flow Graph (CFG)
 
 ## Overview
 A **Control Flow Graph (CFG)** 是程序计算和控制流的图表示。用于建模程序的执行路径，是静态分析的核心。
@@ -56,3 +56,23 @@ clang -fdump-tree-cfg my_program.cpp
 ```bash
 clang --analyze my_program.cpp
 ```
+
+# 数据流图（data flow graph， DFG）
+
+图数据流图（DFG，Data Flow Graph）是一种图形化表示，用于描述程序中数据之间的流动和依赖关系。每个节点通常表示一个操作或计算，每条边表示数据的流动和依赖。
+```cpp
+quad( a, b, c)
+t1 = a*c;
+t2 = 4*t1;
+t3 = b*b;
+t4 = t3 - t2;
+t5 = sqrt( t4);
+t6 = -b;
+t7 = t6 - t5;
+t8 = t7 + t5;
+t9 = 2*a;
+r1 = t7/t9;
+r2 = t8/t9;
+```
+
+![dfg](../assets/LLM/dfg.gif "dfg")
